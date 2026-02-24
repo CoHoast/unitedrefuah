@@ -58,38 +58,38 @@ export function MobileApp() {
           </div>
 
           {/* Phone Mockups */}
-          <div className="relative flex justify-center items-center">
+          <div className="relative flex justify-center items-center min-h-[520px]">
             {/* Phone 1 - Dashboard (front) */}
             <div className="relative z-10 transform rotate-[-5deg]">
-              <div className="relative w-[280px] h-[580px] bg-black rounded-[3rem] p-3 shadow-2xl">
+              <div className="relative w-[260px] h-[460px] bg-black rounded-[2.5rem] p-2 shadow-2xl">
                 {/* Phone notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl z-20" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-black rounded-b-xl z-20" />
                 {/* Screen */}
-                <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden">
+                <div className="w-full h-full bg-white rounded-[2rem] overflow-hidden">
                   <Image
                     src="/images/mobile-dashboard.jpg"
                     alt="Mobile Dashboard"
-                    width={280}
-                    height={580}
-                    className="w-full h-full object-cover object-top"
+                    width={614}
+                    height={983}
+                    className="w-full h-full object-contain bg-slate-100"
                   />
                 </div>
               </div>
             </div>
 
             {/* Phone 2 - Profile (back) */}
-            <div className="absolute right-0 lg:right-[-40px] top-8 transform rotate-[8deg] opacity-80">
-              <div className="relative w-[240px] h-[500px] bg-gray-800 rounded-[2.5rem] p-2.5 shadow-xl">
+            <div className="absolute right-0 lg:right-[-20px] top-12 transform rotate-[8deg]">
+              <div className="relative w-[220px] h-[400px] bg-gray-800 rounded-[2rem] p-2 shadow-xl">
                 {/* Phone notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-gray-800 rounded-b-xl z-20" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-gray-800 rounded-b-lg z-20" />
                 {/* Screen */}
-                <div className="w-full h-full bg-white rounded-[2rem] overflow-hidden">
+                <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden">
                   <Image
                     src="/images/mobile-profile.jpg"
                     alt="Mobile Profile"
-                    width={240}
-                    height={500}
-                    className="w-full h-full object-cover object-top"
+                    width={619}
+                    height={1047}
+                    className="w-full h-full object-contain bg-slate-100"
                   />
                 </div>
               </div>
