@@ -193,11 +193,11 @@ export default function AdminDashboard() {
                             </Badge>
                           </td>
                           <td className="py-4">
-                            {app.ai_score !== null && (
+                            {app.ai_score != null && (
                               <div className="flex items-center gap-2">
                                 <div className={`text-lg font-bold ${
-                                  app.ai_score >= 80 ? "text-green-600" :
-                                  app.ai_score >= 50 ? "text-orange-600" :
+                                  (app.ai_score ?? 0) >= 80 ? "text-green-600" :
+                                  (app.ai_score ?? 0) >= 50 ? "text-orange-600" :
                                   "text-red-600"
                                 }`}>
                                   {app.ai_score}
