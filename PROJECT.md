@@ -135,14 +135,26 @@ united-refuah/
 - Recommended: "HIPAA-ready" security without full compliance overhead
 - Use encryption, MFA, audit logs
 
-## Key URLs (Development)
+## Deployment (LIVE)
+- **GitHub**: https://github.com/CoHoast/unitedrefuah
+- **Railway**: https://unitedrefuah-production.up.railway.app
+- Auto-deploys from GitHub main branch
+
+## Key URLs
+**Production:**
+- Homepage: https://unitedrefuah-production.up.railway.app
+- Apply: https://unitedrefuah-production.up.railway.app/apply
+- Admin: https://unitedrefuah-production.up.railway.app/admin
+- Member Portal: https://unitedrefuah-production.up.railway.app/member
+
+**Local Development:**
 - Homepage: http://localhost:3000
 - Apply: http://localhost:3000/apply
 - Admin: http://localhost:3000/admin
 - Member Portal: http://localhost:3000/member
 
-## Preview Links
-Use cloudflared for sharing:
+## Local Preview (Cloudflared)
+Use cloudflared for sharing local dev:
 ```bash
 /opt/homebrew/opt/cloudflared/bin/cloudflared tunnel --url http://localhost:3000
 ```
@@ -253,6 +265,43 @@ Cost difference:
 - `/member/claims` - Claims list
 - `/member/chat` - AI chat assistant
 - `/member/profile` - Profile settings
+
+---
+
+## Latest Updates (Feb 24, 2026)
+
+### Design Improvements
+- **Blue Hero Section**: Bold gradient background, white text, glass morphism stats
+- **SVG Icons**: Replaced ALL emoji icons with on-brand Heroicons throughout site
+- **Phone Mockups**: Fixed image fitting, responsive sizing
+
+### Mobile Optimization (Full Audit)
+- Hidden top bar on mobile to prevent overflow
+- Pricing card scale effect only on desktop
+- Comparison table: card layout on mobile (instead of cramped 3-column)
+- Phone mockups: responsive at 3 breakpoints, 2nd phone hidden on small screens
+- Page layouts: responsive header padding
+- Global CSS: touch targets, iOS fixes, overflow prevention
+
+### Pages Complete
+- Homepage (Hero, HowItWorks, PortalPreview, MobileApp, Comparison, Pricing, Testimonials, About, Podcasts, FAQ, CTA)
+- About page (8 team members)
+- Contact page
+- FAQs page  
+- TeleRefuah page
+- Login page
+- Apply wizard (9 steps + dynamic branching demo at /apply-dynamic)
+- Admin dashboard
+- Full member portal (Dashboard, ID Card, Family, Claims, Submit, Documents, Billing, Notifications, Chat, Profile)
+
+### Still Needed
+- Savings calculator
+- Animated stats on scroll
+- Sharing Guidelines page
+- Provider Services pages
+- Tax Information page
+- Real authentication
+- MCO/member database API integration
 
 ---
 
