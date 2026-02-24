@@ -77,6 +77,29 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* Video Section */}
+        <section className="py-16 sm:py-20 bg-muted/30">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-foreground text-center mb-8">
+              Is United Refuah For You?
+            </h2>
+            <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black">
+              <video 
+                className="w-full h-full"
+                controls
+                preload="metadata"
+                poster="/images/family2.png"
+              >
+                <source 
+                  src="https://unitedrefuahhs.org/wp-content/uploads/2023/08/is_united_refuah_for_you_-1080p.mp4" 
+                  type="video/mp4" 
+                />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </section>
+
         {/* Mission */}
         <section className="py-16 sm:py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
