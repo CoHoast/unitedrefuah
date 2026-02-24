@@ -19,7 +19,7 @@ const tourStops = [
       "Trust indicators & testimonials",
       "SEO-optimized structure",
     ],
-    link: "/",
+    link: "/?proposal=true",
     linkText: "View Marketing Site →",
   },
   {
@@ -33,7 +33,7 @@ const tourStops = [
       "Progress tracking",
       "AI-powered risk analysis",
     ],
-    link: "/apply",
+    link: "/apply?proposal=true",
     linkText: "Try Application Wizard →",
   },
   {
@@ -47,7 +47,7 @@ const tourStops = [
       "24/7 TeleRefuah access",
       "Real-time notifications",
     ],
-    link: "/member",
+    link: "/member?proposal=true",
     linkText: "Explore Member Portal →",
   },
   {
@@ -61,7 +61,7 @@ const tourStops = [
       "Claims oversight",
       "Analytics & reporting",
     ],
-    link: "/admin",
+    link: "/admin?proposal=true",
     linkText: "View Admin Dashboard →",
   },
 ];
