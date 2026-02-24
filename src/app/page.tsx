@@ -5,6 +5,7 @@ import { Pricing } from "@/components/Pricing";
 import { Comparison } from "@/components/Comparison";
 import { About } from "@/components/About";
 import { Testimonials } from "@/components/Testimonials";
+import { PortalPreview } from "@/components/PortalPreview";
 import { Podcasts } from "@/components/Podcasts";
 import { FAQ } from "@/components/FAQ";
 import { CTA } from "@/components/CTA";
@@ -21,6 +22,7 @@ export default function Home() {
         <Pricing />
         <About />
         <Testimonials />
+        <PortalPreview />
         <Podcasts />
         <FAQ />
         <CTA />
