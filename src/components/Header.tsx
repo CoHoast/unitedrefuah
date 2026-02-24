@@ -56,7 +56,7 @@ export function Header() {
               <Link href="/login">Member Login</Link>
             </Button>
             <Button size="sm" asChild>
-              <Link href="#pricing">Apply Now</Link>
+              <Link href="/apply">Apply Now</Link>
             </Button>
           </div>
 
@@ -98,7 +98,7 @@ export function Header() {
                   <Link href="/login">Member Login</Link>
                 </Button>
                 <Button size="sm" asChild>
-                  <Link href="#pricing">Apply Now</Link>
+                  <Link href="/apply">Apply Now</Link>
                 </Button>
               </div>
             </div>
