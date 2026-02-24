@@ -15,8 +15,11 @@ export function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left content */}
           <div className="text-center lg:text-left">
-            <Badge className="mb-6 bg-white/20 text-white border-white/30 hover:bg-white/30">
-              ✡️ Serving the Jewish Community Since 2018
+            <Badge className="mb-6 bg-white/20 text-white border-white/30 hover:bg-white/30 inline-flex items-center gap-2">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L9.5 7.5H3L7.5 12L3 16.5H9.5L12 22L14.5 16.5H21L16.5 12L21 7.5H14.5L12 2Z" />
+              </svg>
+              Serving the Jewish Community Since 2018
             </Badge>
             
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">
