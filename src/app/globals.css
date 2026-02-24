@@ -81,9 +81,72 @@ body {
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Focus styles for accessibility */
 :focus-visible {
   @apply outline-2 outline-offset-2 outline-ring;
+}
+
+/* Mobile-first optimizations */
+@media (max-width: 640px) {
+  /* Larger touch targets */
+  button, 
+  a, 
+  input[type="checkbox"], 
+  input[type="radio"],
+  select {
+    min-height: 44px;
+  }
+  
+  /* Better input styling on mobile */
+  input, textarea, select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+  
+  /* Card touch feedback */
+  .card-interactive {
+    transition: transform 0.1s ease;
+  }
+  .card-interactive:active {
+    transform: scale(0.98);
+  }
+}
+
+/* PWA safe areas */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Hide scrollbar but allow scrolling */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Prevent text selection on interactive elements */
+.no-select {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Loading states */
+.skeleton {
+  @apply animate-pulse bg-muted rounded;
+}
+
+/* Better form spacing on mobile */
+@media (max-width: 640px) {
+  .form-spacing > * + * {
+    margin-top: 1rem;
+  }
 }

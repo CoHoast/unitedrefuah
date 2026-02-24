@@ -117,27 +117,33 @@ export default function ApplyPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-muted/30 pt-24 pb-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          {/* Progress */}
-          <div className="mb-8">
+      <main className="min-h-screen bg-muted/30 pt-20 sm:pt-24 pb-8 sm:pb-16">
+        <div className="mx-auto max-w-3xl px-3 sm:px-6">
+          {/* Progress - Mobile optimized */}
+          <div className="mb-4 sm:mb-8">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-muted-foreground">
+              <span className="text-xs sm:text-sm font-medium text-muted-foreground">
                 Step {currentStep} of {visibleSteps.length}
               </span>
-              <span className="text-sm font-medium text-primary">
+              <span className="text-xs sm:text-sm font-medium text-primary">
                 {Math.round(progress)}% Complete
               </span>
             </div>
             <Progress value={progress} className="h-2" />
+            
+            {/* Mobile step name */}
+            <div className="sm:hidden mt-2 text-center">
+              <span className="text-sm font-medium text-foreground">{currentStepConfig?.name}</span>
+              <span className="text-xs text-muted-foreground block">{currentStepConfig?.description}</span>
+            </div>
           </div>
 
-          {/* Step indicators */}
-          <div className="hidden sm:flex items-center justify-between mb-8 overflow-x-auto">
+          {/* Step indicators - Desktop only */}
+          <div className="hidden sm:flex items-center justify-between mb-8 overflow-x-auto pb-2">
             {visibleSteps.map((step, index) => (
               <div
                 key={step.id}
-                className={`flex flex-col items-center ${
+                className={`flex flex-col items-center flex-shrink-0 ${
                   index + 1 === currentStep
                     ? "text-primary"
                     : index + 1 < currentStep
@@ -162,31 +168,32 @@ export default function ApplyPage() {
           </div>
 
           {/* Main content */}
-          <Card>
-            <CardHeader>
+          <Card className="shadow-sm">
+            <CardHeader className="hidden sm:block">
               <CardTitle>{currentStepConfig?.name}</CardTitle>
               <CardDescription>{currentStepConfig?.description}</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4 sm:p-6">
               {submitError && (
-                <div className="mb-4 p-4 bg-destructive/10 text-destructive rounded-lg">
+                <div className="mb-4 p-3 sm:p-4 bg-destructive/10 text-destructive rounded-lg text-sm">
                   {submitError}
                 </div>
               )}
               {renderStep()}
 
-              {/* Navigation */}
+              {/* Navigation - Mobile optimized */}
               {!isLastStep && (
-                <div className="flex justify-between mt-8 pt-6 border-t">
+                <div className="flex justify-between mt-6 sm:mt-8 pt-4 sm:pt-6 border-t gap-3">
                   <Button
                     variant="outline"
                     onClick={prevStep}
                     disabled={isFirstStep}
+                    className="flex-1 sm:flex-none"
                   >
-                    ← Previous
+                    <span className="hidden sm:inline">←</span> Back
                   </Button>
-                  <Button onClick={nextStep}>
-                    Next →
+                  <Button onClick={nextStep} className="flex-1 sm:flex-none">
+                    Next <span className="hidden sm:inline">→</span>
                   </Button>
                 </div>
               )}
