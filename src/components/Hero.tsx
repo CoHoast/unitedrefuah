@@ -113,25 +113,6 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="mt-12 sm:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 max-w-4xl mx-auto lg:max-w-none">
-          <div className="text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur border border-white/20">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">60%</div>
-            <div className="text-xs sm:text-sm text-white/70 mt-1">Avg. Savings</div>
-          </div>
-          <div className="text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur border border-white/20">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">5,000+</div>
-            <div className="text-xs sm:text-sm text-white/70 mt-1">Member Families</div>
-          </div>
-          <div className="text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur border border-white/20">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">$50M+</div>
-            <div className="text-xs sm:text-sm text-white/70 mt-1">Bills Shared</div>
-          </div>
-          <div className="text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur border border-white/20">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">98%</div>
-            <div className="text-xs sm:text-sm text-white/70 mt-1">Satisfaction</div>
-          </div>
-        </div>
       </div>
     </section>
   );

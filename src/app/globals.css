@@ -14,8 +14,8 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0.02 260);
   
-  /* Primary - Deep Trustworthy Blue */
-  --primary: oklch(0.45 0.15 250);
+  /* Primary - United Refuah Brand Blue (#135c9f) */
+  --primary: oklch(0.42 0.12 245);
   --primary-foreground: oklch(0.99 0 0);
   
   /* Secondary - Warm Gold (Torah/Community) */
