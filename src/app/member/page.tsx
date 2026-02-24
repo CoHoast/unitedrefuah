@@ -31,8 +31,10 @@ const recentActivity = [
 const quickActions = [
   { icon: "📄", label: "Submit Claim", href: "/member/submit", color: "bg-green-100 text-green-600" },
   { icon: "📞", label: "TeleRefuah", href: "/telerefuah", color: "bg-blue-100 text-blue-600" },
+  { icon: "💳", label: "ID Card", href: "/member/id-card", color: "bg-indigo-100 text-indigo-600" },
+  { icon: "👨‍👩‍👧", label: "Family", href: "/member/family", color: "bg-pink-100 text-pink-600" },
   { icon: "📁", label: "Documents", href: "/member/documents", color: "bg-purple-100 text-purple-600" },
-  { icon: "❓", label: "Get Help", href: "/member/chat", color: "bg-orange-100 text-orange-600" },
+  { icon: "💵", label: "Billing", href: "/member/billing", color: "bg-emerald-100 text-emerald-600" },
 ];
 
 export default function MemberDashboard() {
