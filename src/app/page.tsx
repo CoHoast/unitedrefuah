@@ -6,6 +6,7 @@ import { Comparison } from "@/components/Comparison";
 import { About } from "@/components/About";
 import { Testimonials } from "@/components/Testimonials";
 import { PortalPreview } from "@/components/PortalPreview";
+import { MobileApp } from "@/components/MobileApp";
 import { Podcasts } from "@/components/Podcasts";
 import { FAQ } from "@/components/FAQ";
 import { CTA } from "@/components/CTA";
@@ -23,6 +24,7 @@ export default function Home() {
         <About />
         <Testimonials />
         <PortalPreview />
+        <MobileApp />
         <Podcasts />
         <FAQ />
         <CTA />
