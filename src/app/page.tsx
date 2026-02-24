@@ -19,12 +19,12 @@ export default function Home() {
       <main className="pt-[104px]">
         <Hero />
         <HowItWorks />
-        <Comparison />
-        <Pricing />
-        <About />
-        <Testimonials />
         <PortalPreview />
         <MobileApp />
+        <Comparison />
+        <Pricing />
+        <Testimonials />
+        <About />
         <Podcasts />
         <FAQ />
         <CTA />
