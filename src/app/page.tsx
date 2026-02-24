@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       <HeaderNew />
-      <main className="pt-[104px]">
+      <main className="pt-16 sm:pt-[104px]">
         <Hero />
         <HowItWorks />
         <PortalPreview />

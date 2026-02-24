@@ -100,14 +100,14 @@ export function MobileApp() {
           </div>
 
           {/* Phone Mockups */}
-          <div className="relative flex justify-center items-center min-h-[520px]">
+          <div className="relative flex justify-center items-center min-h-[400px] sm:min-h-[480px] lg:min-h-[520px]">
             {/* Phone 1 - Dashboard (front) */}
-            <div className="relative z-10 transform rotate-[-5deg]">
-              <div className="relative w-[260px] h-[460px] bg-black rounded-[2.5rem] p-2 shadow-2xl">
+            <div className="relative z-10 transform sm:rotate-[-5deg]">
+              <div className="relative w-[200px] h-[360px] sm:w-[240px] sm:h-[420px] lg:w-[260px] lg:h-[460px] bg-black rounded-[2rem] sm:rounded-[2.5rem] p-1.5 sm:p-2 shadow-2xl">
                 {/* Phone notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-black rounded-b-xl z-20" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 sm:w-20 lg:w-24 h-4 sm:h-5 lg:h-6 bg-black rounded-b-lg sm:rounded-b-xl z-20" />
                 {/* Screen */}
-                <div className="w-full h-full bg-white rounded-[2rem] overflow-hidden">
+                <div className="w-full h-full bg-white rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden">
                   <Image
                     src="/images/mobile-dashboard.jpg"
                     alt="Mobile Dashboard"
@@ -119,13 +119,13 @@ export function MobileApp() {
               </div>
             </div>
 
-            {/* Phone 2 - Profile (back) */}
-            <div className="absolute right-0 lg:right-[-20px] top-12 transform rotate-[8deg]">
-              <div className="relative w-[220px] h-[400px] bg-gray-800 rounded-[2rem] p-2 shadow-xl">
+            {/* Phone 2 - Profile (back) - hidden on small mobile */}
+            <div className="hidden sm:block absolute right-0 lg:right-[-20px] top-8 sm:top-12 transform rotate-[8deg]">
+              <div className="relative w-[180px] h-[320px] sm:w-[200px] sm:h-[360px] lg:w-[220px] lg:h-[400px] bg-gray-800 rounded-[1.5rem] sm:rounded-[2rem] p-1.5 sm:p-2 shadow-xl">
                 {/* Phone notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-gray-800 rounded-b-lg z-20" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 sm:w-16 lg:w-20 h-3 sm:h-4 lg:h-5 bg-gray-800 rounded-b-md sm:rounded-b-lg z-20" />
                 {/* Screen */}
-                <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden">
+                <div className="w-full h-full bg-white rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden">
                   <Image
                     src="/images/mobile-profile.jpg"
                     alt="Mobile Profile"
@@ -138,7 +138,7 @@ export function MobileApp() {
             </div>
 
             {/* Decorative elements */}
-            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
+            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 sm:w-80 lg:w-96 h-64 sm:h-80 lg:h-96 bg-white/10 rounded-full blur-3xl" />
           </div>
         </div>
       </div>

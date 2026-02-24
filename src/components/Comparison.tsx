@@ -60,8 +60,8 @@ export function Comparison() {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          {/* Table Header */}
-          <div className="grid grid-cols-3 gap-4 mb-4 px-4">
+          {/* Desktop Table Header - hidden on mobile */}
+          <div className="hidden md:grid grid-cols-3 gap-4 mb-4 px-4">
             <div className="font-semibold text-muted-foreground text-sm"></div>
             <div className="text-center">
               <span className="font-semibold text-muted-foreground text-sm">Traditional Insurance</span>
@@ -71,8 +71,8 @@ export function Comparison() {
             </div>
           </div>
 
-          {/* Table Rows */}
-          <div className="space-y-2">
+          {/* Desktop Table Rows - hidden on mobile */}
+          <div className="hidden md:block space-y-2">
             {comparisons.map((item, index) => (
               <div 
                 key={item.feature}
@@ -90,6 +90,30 @@ export function Comparison() {
                   <span className={item.savings ? "text-success font-semibold" : "text-foreground"}>
                     {item.healthShare}
                   </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Card Layout */}
+          <div className="md:hidden space-y-4">
+            {comparisons.map((item) => (
+              <div 
+                key={item.feature}
+                className="bg-card rounded-xl p-4 border border-border"
+              >
+                <h3 className="font-semibold text-foreground mb-3">{item.feature}</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center py-2 border-b border-border/50">
+                    <span className="text-sm text-muted-foreground">Traditional</span>
+                    <span className="text-sm text-muted-foreground">{item.traditional}</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="text-sm font-medium text-primary">United Refuah</span>
+                    <span className={`text-sm font-semibold ${item.savings ? "text-success" : "text-foreground"}`}>
+                      {item.healthShare}
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}

@@ -150,3 +150,44 @@ html {
     margin-top: 1rem;
   }
 }
+
+/* Ensure buttons and links have proper touch targets */
+@media (max-width: 640px) {
+  .btn-touch {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+/* Prevent horizontal overflow */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Sticky header fix for iOS */
+.sticky-header {
+  position: sticky;
+  position: -webkit-sticky;
+}
+
+/* Smooth momentum scrolling on iOS */
+.scroll-container {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better image rendering */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive text utilities */
+@media (max-width: 640px) {
+  .text-responsive {
+    font-size: clamp(0.875rem, 4vw, 1rem);
+  }
+  
+  .heading-responsive {
+    font-size: clamp(1.5rem, 6vw, 2.25rem);
+  }
+}

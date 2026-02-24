@@ -90,8 +90,8 @@ export function HeaderNew() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-border">
-      {/* Top bar */}
-      <div className="bg-primary text-white text-sm">
+      {/* Top bar - hidden on mobile, visible on sm+ */}
+      <div className="hidden sm:block bg-primary text-white text-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-10">
             <a href="tel:4407720700" className="flex items-center gap-2 hover:text-white/80">
@@ -102,7 +102,7 @@ export function HeaderNew() {
             </a>
             <div className="flex items-center gap-4">
               <Link href="/login" className="hover:text-white/80">Member Login</Link>
-              <Link href="/member/submit" className="hover:text-white/80">Submit Sharing Request</Link>
+              <Link href="/member/submit" className="hover:text-white/80 hidden md:inline">Submit Sharing Request</Link>
             </div>
           </div>
         </div>

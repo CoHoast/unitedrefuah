@@ -58,7 +58,7 @@ export default function FAQsPage() {
   return (
     <>
       <HeaderNew />
-      <main className="pt-32">
+      <main className="pt-20 sm:pt-32">
         {/* Hero */}
         <section className="bg-gradient-to-b from-primary/5 to-white py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
