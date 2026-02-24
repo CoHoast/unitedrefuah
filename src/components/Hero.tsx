@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function Hero() {
   return (
-    <section className="relative pt-20 pb-12 sm:pt-32 sm:pb-24 overflow-hidden">
+    <section className="relative pt-20 pb-12 sm:pt-28 sm:pb-24 overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 -z-10" />
       <div className="absolute top-20 right-0 w-96 h-96 opacity-10 -z-10">
@@ -69,31 +69,36 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right image */}
+          {/* Right image - Card style like original */}
           <div className="relative hidden lg:block">
-            <div className="relative w-full aspect-square max-w-lg mx-auto">
-              {/* Main image */}
-              <div className="absolute inset-4 rounded-3xl overflow-hidden shadow-2xl">
-                <Image 
-                  src="/images/family2.png" 
-                  alt="Happy family with healthcare coverage" 
-                  fill 
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              {/* Floating card - doctor */}
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full overflow-hidden relative">
-                  <Image src="/images/doctorMotherBaby.png" alt="Doctor with patient" fill className="object-cover" />
+            <div className="relative">
+              {/* Main image card */}
+              <div className="bg-white/80 backdrop-blur rounded-3xl shadow-2xl p-6 pb-4">
+                <div className="relative w-full" style={{ height: '420px' }}>
+                  <Image 
+                    src="/images/family2.png" 
+                    alt="Happy family with healthcare coverage" 
+                    fill 
+                    className="object-contain object-bottom"
+                    priority
+                  />
                 </div>
-                <div>
-                  <div className="text-sm font-semibold">24/7 TeleRefuah</div>
-                  <div className="text-xs text-muted-foreground">Talk to a doctor anytime</div>
+                {/* TeleRefuah badge inside card */}
+                <div className="mt-4 bg-gray-50 rounded-xl p-3 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900">24/7 TeleRefuah</div>
+                    <div className="text-xs text-muted-foreground">Talk to a doctor anytime</div>
+                  </div>
                 </div>
               </div>
-              {/* Floating card - savings */}
-              <div className="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl p-4">
+              
+              {/* Floating savings badge */}
+              <div className="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100">
                 <div className="text-2xl font-bold text-success">60%</div>
                 <div className="text-xs text-muted-foreground">Average Savings</div>
               </div>

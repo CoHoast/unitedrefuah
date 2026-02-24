@@ -5,53 +5,56 @@ import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-const founders = [
+const leadership = [
   {
     name: "Baruch Chaim Manies",
     role: "Founder",
-    bio: "Baruch Chaim Manies is the founder and driving force behind United Refuah HealthShare.",
+    bio: "Baruch Chaim Manies is the founder and driving force behind United Refuah HealthShare. His vision was to create a healthcare sharing organization specifically designed for the Jewish community.",
     image: null,
   },
+];
+
+const boardMembers = [
   {
     name: "John Brown",
     role: "Board Member",
-    bio: "John Brown received his BA from Cleveland State University before pursuing his CPA.",
+    bio: "John Brown received his BA from Cleveland State University before pursuing his CPA. He brings financial expertise and strategic guidance to United Refuah.",
     image: "/images/johnBrownSm.jpg",
   },
   {
     name: "Dr. Salamon",
     role: "Board Member",
-    bio: "Dr. Salamon MD, FRCSC, FACS is a board-certified ophthalmologist and one of the founders of The Cataract Eye Center of Cleveland.",
+    bio: "Dr. Salamon MD, FRCSC, FACS is a board-certified ophthalmologist and one of the founders of The Cataract Eye Center of Cleveland. He provides medical expertise to the organization.",
     image: "/images/solomon.jpg",
   },
   {
     name: "Alan Schabes",
     role: "Board Member",
-    bio: "Alan Schabes graduated Magna Cum Laude from Hofstra University Law School in 1981.",
+    bio: "Alan Schabes graduated Magna Cum Laude from Hofstra University Law School in 1981. His legal expertise helps ensure United Refuah operates with integrity and compliance.",
     image: "/images/Schabes_Alan_Cropped2019sm.jpg",
   },
   {
     name: "Nathan Wiedemann",
     role: "Board Member",
-    bio: "Nathan Wiedemann received his BS in Finance from the University of Baltimore and his JD from Case Western Reserve University (2007).",
+    bio: "Nathan Wiedemann received his BS in Finance from the University of Baltimore and his JD from Case Western Reserve University (2007). He brings both legal and financial insight.",
     image: null,
   },
   {
     name: "Zvi Rokowsky",
     role: "Board Member",
-    bio: "Zvi Rokowsky has been involved with United Refuah HealthShare since its inception.",
+    bio: "Zvi Rokowsky has been involved with United Refuah HealthShare since its inception. His dedication to the community has been instrumental in the organization's growth.",
     image: "/images/rokowsky.jpg",
   },
   {
     name: "Moishe Katz",
     role: "Board Member",
-    bio: "Moishe Katz has a long history of health care advocacy.",
+    bio: "Moishe Katz has a long history of health care advocacy. His passion for helping families access affordable healthcare drives United Refuah's mission.",
     image: "/images/mKatzSm.jpg",
   },
   {
     name: "Mike Sharman",
     role: "Board Member",
-    bio: "Mike Sharman received his JD from the University of Wyoming (1983) and an LLM in International Taxation from Regent University School of Law.",
+    bio: "Mike Sharman received his JD from the University of Wyoming (1983) and an LLM in International Taxation from Regent University School of Law. He provides legal and tax expertise.",
     image: "/images/sharman.jpg",
   },
 ];
@@ -161,20 +164,57 @@ export default function AboutPage() {
         <section className="py-16 sm:py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-foreground text-center mb-4">
-              Our Leadership
+              Leadership
             </h2>
             <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-              United Refuah is led by experienced professionals committed to serving 
+              United Refuah is led by visionary leaders committed to serving 
               the Jewish community with integrity and excellence.
             </p>
+            
+            {/* Founder - Featured */}
+            <div className="max-w-2xl mx-auto mb-16">
+              {leadership.map((person) => (
+                <Card key={person.name} className="overflow-hidden">
+                  <div className="md:flex">
+                    <div className="md:w-1/3 bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center p-8">
+                      {person.image ? (
+                        <Image 
+                          src={person.image} 
+                          alt={person.name}
+                          width={200}
+                          height={200}
+                          className="rounded-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-32 h-32 rounded-full bg-primary/30 flex items-center justify-center">
+                          <span className="text-4xl font-bold text-primary">
+                            {person.name.split(' ').map(n => n[0]).join('')}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <CardContent className="md:w-2/3 p-6 flex flex-col justify-center">
+                      <h3 className="text-2xl font-bold text-foreground">{person.name}</h3>
+                      <p className="text-primary font-medium mb-3">{person.role}</p>
+                      <p className="text-muted-foreground">{person.bio}</p>
+                    </CardContent>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            {/* Board of Directors */}
+            <h3 className="text-2xl font-bold text-foreground text-center mb-8">
+              Board of Directors
+            </h3>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {founders.map((founder) => (
-                <Card key={founder.name} className="overflow-hidden">
+              {boardMembers.map((member) => (
+                <Card key={member.name} className="overflow-hidden">
                   <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                    {founder.image ? (
+                    {member.image ? (
                       <Image 
-                        src={founder.image} 
-                        alt={founder.name}
+                        src={member.image} 
+                        alt={member.name}
                         width={200}
                         height={200}
                         className="w-full h-full object-cover"
@@ -182,15 +222,15 @@ export default function AboutPage() {
                     ) : (
                       <div className="w-24 h-24 rounded-full bg-primary/30 flex items-center justify-center">
                         <span className="text-3xl font-bold text-primary">
-                          {founder.name.split(' ').map(n => n[0]).join('')}
+                          {member.name.split(' ').map(n => n[0]).join('')}
                         </span>
                       </div>
                     )}
                   </div>
                   <CardContent className="p-4">
-                    <h3 className="font-semibold text-foreground">{founder.name}</h3>
-                    <p className="text-sm text-primary mb-2">{founder.role}</p>
-                    <p className="text-sm text-muted-foreground line-clamp-3">{founder.bio}</p>
+                    <h4 className="font-semibold text-foreground">{member.name}</h4>
+                    <p className="text-sm text-primary mb-2">{member.role}</p>
+                    <p className="text-sm text-muted-foreground line-clamp-3">{member.bio}</p>
                   </CardContent>
                 </Card>
               ))}
