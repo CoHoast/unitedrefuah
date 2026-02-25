@@ -101,7 +101,25 @@ export function MobileApp() {
 
           {/* Phone Mockups */}
           <div className="relative flex justify-center items-center min-h-[400px] sm:min-h-[480px] lg:min-h-[520px]">
-            {/* Phone 1 - Dashboard (front) */}
+            {/* Phone 1 - ID Card (left back) - hidden on small mobile */}
+            <div className="hidden lg:block absolute left-0 lg:left-[-20px] top-8 sm:top-12 transform rotate-[-8deg]">
+              <div className="relative w-[180px] h-[320px] sm:w-[200px] sm:h-[360px] lg:w-[220px] lg:h-[400px] bg-gray-800 rounded-[1.5rem] sm:rounded-[2rem] p-1.5 sm:p-2 shadow-xl">
+                {/* Phone notch */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 sm:w-16 lg:w-20 h-3 sm:h-4 lg:h-5 bg-gray-800 rounded-b-md sm:rounded-b-lg z-20" />
+                {/* Screen */}
+                <div className="w-full h-full bg-white rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden">
+                  <Image
+                    src="/images/mobile-idcard.jpg"
+                    alt="Mobile ID Card"
+                    width={619}
+                    height={1047}
+                    className="w-full h-full object-contain bg-slate-100"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Phone 2 - Dashboard (front center) */}
             <div className="relative z-10 transform sm:rotate-[-5deg]">
               <div className="relative w-[200px] h-[360px] sm:w-[240px] sm:h-[420px] lg:w-[260px] lg:h-[460px] bg-black rounded-[2rem] sm:rounded-[2.5rem] p-1.5 sm:p-2 shadow-2xl">
                 {/* Phone notch */}
@@ -119,7 +137,7 @@ export function MobileApp() {
               </div>
             </div>
 
-            {/* Phone 2 - Profile (back) - hidden on small mobile */}
+            {/* Phone 3 - Profile (right back) - hidden on small mobile */}
             <div className="hidden sm:block absolute right-0 lg:right-[-20px] top-8 sm:top-12 transform rotate-[8deg]">
               <div className="relative w-[180px] h-[320px] sm:w-[200px] sm:h-[360px] lg:w-[220px] lg:h-[400px] bg-gray-800 rounded-[1.5rem] sm:rounded-[2rem] p-1.5 sm:p-2 shadow-xl">
                 {/* Phone notch */}
