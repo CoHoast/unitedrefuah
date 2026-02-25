@@ -294,9 +294,36 @@ Cost difference:
 - Admin dashboard
 - Full member portal (Dashboard, ID Card, Family, Claims, Submit, Documents, Billing, Notifications, Chat, Profile)
 
+### Preview Pages (Proposal)
+Added comprehensive preview pages at `/preview/*` for client proposal:
+
+**`/preview/marketing`** - Full marketing site showcase
+- Hero, Stats, How It Works, Calculator preview, Pricing, Comparison table, Testimonials, FAQ, CTA, Footer
+- Fixed hero image sizing with aspect ratio container
+
+**`/preview/admin`** - Admin panel with full sidebar
+- Left sidebar navigation with 5 sections (Overview, Applications, Members, Claims & Billing, Administration)
+- Role-based access controls: Super Admin, Admin, Reviewer, Support, Billing
+- Team Members panel with role badges
+- All SVG Heroicons
+
+**`/preview/mobile`** - Mobile app showcase
+- 4 phone mockups: Dashboard, ID Card, Claims, Profile
+- All SVG icons (no emojis)
+
+**`/preview/dashboard`** - Member dashboard preview
+
+**`/preview/dokit`** - DOKit AI Document Intake (Add-On Service)
+- Automated document processing workflow for United Refuah
+- 5-step pipeline: Retrieval → AI Analysis → Extraction → Validation → MCO Submission
+- Before/After comparison (manual vs automated)
+- Supported doc types: EOBs, Claims, Invoices, Correspondence
+- MCO integration options: REST API, SFTP, HL7/FHIR
+- Pricing: $15-25K setup, $2-5K/month
+
 ### Still Needed
-- Savings calculator
-- Animated stats on scroll
+- Capture real screenshots for proposal page
+- Replace mobile-idcard.jpg placeholder
 - Sharing Guidelines page
 - Provider Services pages
 - Tax Information page
