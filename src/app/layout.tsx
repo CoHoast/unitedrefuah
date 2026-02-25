@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Suspense } from "react";
-import { ProposalBanner } from "@/components/ProposalBanner";
 import "./globals.css";
 
 const inter = Inter({ 
@@ -28,9 +26,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="min-h-screen font-sans">
-        <Suspense fallback={null}>
-          <ProposalBanner />
-        </Suspense>
         {children}
       </body>
     </html>
