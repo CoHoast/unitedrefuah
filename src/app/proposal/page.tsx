@@ -2,94 +2,59 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-// Screenshot data with annotations
-const sections = [
-  {
-    id: "welcome",
-    type: "intro",
-  },
+const previews = [
   {
     id: "marketing",
-    type: "showcase",
-    title: "Modern Marketing Website",
-    subtitle: "Premium design that converts visitors to members",
-    description: "A beautiful, mobile-first website that builds trust and drives applications with clear messaging and strong calls-to-action.",
-    screenshot: "/proposal-screenshots/marketing-hero.jpg",
-    features: [
-      { label: "Conversion-Focused Hero", description: "Bold headline, clear value proposition, and prominent CTAs above the fold" },
-      { label: "Trust Indicators", description: "Member count, satisfaction rate, and community stats build instant credibility" },
-      { label: "Mobile-First Design", description: "Looks stunning on any device - phones, tablets, and desktops" },
-      { label: "SEO Optimized", description: "Built for search engines with proper structure, meta tags, and fast load times" },
-    ],
+    title: "Marketing Website",
+    description: "Premium, conversion-focused design that builds trust and drives applications",
+    href: "/preview/marketing",
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+      </svg>
+    ),
+    features: ["Modern hero section", "Pricing comparison", "Testimonials", "FAQ section"],
   },
   {
-    id: "calculator",
-    type: "showcase",
-    title: "Interactive Savings Calculator",
-    subtitle: "Let visitors see their potential savings instantly",
-    description: "An engaging tool that lets prospects compare their current insurance costs and see exactly how much they could save with United Refuah.",
-    screenshot: "/proposal-screenshots/savings-calculator.jpg",
-    features: [
-      { label: "Household Selection", description: "Individual, couple, or family options with instant pricing" },
-      { label: "Real-Time Calculations", description: "Monthly and yearly savings displayed immediately" },
-      { label: "Strong CTA", description: "Drives visitors to apply while they're excited about savings" },
-    ],
-  },
-  {
-    id: "member-portal",
-    type: "showcase",
+    id: "dashboard",
     title: "Member Dashboard",
-    subtitle: "Everything members need at their fingertips",
-    description: "A clean, intuitive dashboard where members can track their PreShare, view their ID card, and manage their account.",
-    screenshot: "/images/member-portal-dashboard.jpg",
-    features: [
-      { label: "Digital ID Card", description: "Instant access to member ID - download PDF or add to Apple Wallet" },
-      { label: "PreShare Tracking", description: "Visual progress bar shows remaining annual PreShare amount" },
-      { label: "Quick Actions", description: "One-tap access to submit claims, call TeleRefuah, view documents" },
-      { label: "Recent Activity", description: "Track claims, payments, and notifications in one place" },
-    ],
-  },
-  {
-    id: "mobile-app",
-    type: "showcase",
-    title: "Mobile App Experience",
-    subtitle: "Healthcare management in their pocket",
-    description: "A Progressive Web App (PWA) that members can install on their phones - no app store needed. Works offline and sends push notifications.",
-    screenshot: "/images/mobile-dashboard.jpg",
-    screenshotAlt: "/images/mobile-profile.jpg",
-    isMobile: true,
-    features: [
-      { label: "Install on Any Phone", description: "Works on iPhone and Android without app store approval" },
-      { label: "Native App Feel", description: "Smooth animations, offline support, push notifications" },
-      { label: "24/7 TeleRefuah Access", description: "One tap to connect with a doctor anytime" },
-      { label: "Submit Claims Anywhere", description: "Take photos of bills and submit from your phone" },
-    ],
+    description: "Intuitive portal where members manage their account and track claims",
+    href: "/preview/dashboard",
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+      </svg>
+    ),
+    features: ["Digital ID card", "PreShare tracking", "Quick actions", "Activity feed"],
   },
   {
     id: "admin",
-    type: "showcase",
-    title: "Admin Dashboard",
-    subtitle: "Powerful tools to manage operations",
-    description: "A comprehensive admin panel for reviewing applications, managing members, and overseeing claims.",
-    screenshot: "/proposal-screenshots/admin-dashboard.jpg",
-    features: [
-      { label: "Application Queue", description: "Review, approve, or deny applications with one click" },
-      { label: "AI Risk Scoring", description: "Automatic analysis flags potential issues for review" },
-      { label: "Member Management", description: "Search, view, and manage all member accounts" },
-      { label: "Analytics & Reports", description: "Track key metrics and generate reports" },
-    ],
+    title: "Admin Panel",
+    description: "Powerful tools for managing applications, members, and operations",
+    href: "/preview/admin",
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+      </svg>
+    ),
+    features: ["AI risk scoring", "Application queue", "One-click actions", "Activity logs"],
   },
   {
-    id: "pricing",
-    type: "pricing",
-  },
-  {
-    id: "next-steps",
-    type: "cta",
+    id: "mobile",
+    title: "Mobile App",
+    description: "Progressive Web App that works on any smartphone - no app store needed",
+    href: "/preview/mobile",
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+      </svg>
+    ),
+    features: ["Native app feel", "Push notifications", "Offline support", "One-tap TeleRefuah"],
   },
 ];
 
@@ -99,27 +64,27 @@ const packages = [
     price: "$35,000 - $45,000",
     description: "Everything you need to launch",
     features: [
-      "Marketing website (all pages)",
-      "Member application wizard",
-      "AI application analysis",
+      "Marketing website",
+      "Member application",
+      "AI analysis",
       "Admin dashboard",
-      "Member portal & mobile app",
-      "Basic authentication",
-      "Deployment & training",
+      "Member portal",
+      "Basic auth",
+      "Deployment",
     ],
     timeline: "6-8 weeks",
   },
   {
     name: "Full Production",
     price: "$55,000 - $70,000",
-    description: "Enterprise-ready with integrations",
+    description: "Enterprise-ready",
     features: [
       "Everything in Essentials",
       "AI Chat assistant",
-      "Email/SMS notifications",
-      "Payment integration (Stripe)",
-      "Multi-factor authentication",
-      "API integrations (5-7 systems)",
+      "Email/SMS alerts",
+      "Stripe payments",
+      "MFA",
+      "API integrations",
       "90-day support",
     ],
     timeline: "10-12 weeks",
@@ -128,260 +93,128 @@ const packages = [
 ];
 
 export default function ProposalPage() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const currentSection = sections[currentIndex];
-  const totalSections = sections.length;
-
-  const nextSection = () => {
-    if (currentIndex < sections.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
-
-  const prevSection = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
+  const [activeSection, setActiveSection] = useState<"previews" | "pricing">("previews");
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary via-primary to-primary/95">
-      {/* Progress bar */}
-      <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-white/20">
-        <div 
-          className="h-full bg-accent transition-all duration-500"
-          style={{ width: `${((currentIndex + 1) / totalSections) * 100}%` }}
-        />
-      </div>
-
-      {/* Navigation */}
-      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
-        <span className="text-white/60 text-sm">
-          {currentIndex + 1} / {totalSections}
-        </span>
-      </div>
-
-      {/* Welcome Section */}
-      {currentSection.type === "intro" && (
-        <section className="min-h-screen flex items-center justify-center px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-8">
-              <Image
-                src="/images/UnitedRefuahLogoHands-2.svg"
-                alt="United Refuah"
-                width={100}
-                height={100}
-                className="mx-auto mb-6 brightness-0 invert"
-              />
-              <Badge className="bg-white/20 text-white border-white/30 mb-6">
-                Digital Platform Proposal
-              </Badge>
+      {/* Header */}
+      <header className="py-8 px-6">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/images/UnitedRefuahLogoHands-2.svg"
+              alt="United Refuah"
+              width={50}
+              height={50}
+              className="brightness-0 invert"
+            />
+            <div>
+              <p className="font-bold text-white">United Refuah</p>
+              <p className="text-xs text-white/60">Digital Platform Proposal</p>
             </div>
-            
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
-              United Refuah HealthShare
-              <span className="block text-accent mt-2">Digital Transformation</span>
-            </h1>
-            
-            <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-              A preview of what your new digital platform could look like. 
-              Modern design, powerful features, seamless member experience.
-            </p>
-
-            <div className="bg-white/10 backdrop-blur rounded-2xl p-6 mb-8 max-w-md mx-auto">
-              <h3 className="text-white font-semibold mb-3">What You&apos;ll See:</h3>
-              <ul className="text-left text-white/80 space-y-2">
-                <li className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                  </svg>
-                  Marketing Website Design
-                </li>
-                <li className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                  </svg>
-                  Member Portal Preview
-                </li>
-                <li className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                  </svg>
-                  Mobile App Concept
-                </li>
-                <li className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                  </svg>
-                  Admin Dashboard Overview
-                </li>
-              </ul>
-            </div>
-
-            <Button 
-              size="lg" 
-              onClick={nextSection}
-              variant="secondary"
-              className="font-semibold px-8"
-            >
-              Start Preview
-              <svg className="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </Button>
-
-            <p className="text-white/40 text-sm mt-12">
-              Prepared by CorSynq • February 2026
-            </p>
           </div>
-        </section>
-      )}
+          <div className="flex gap-2">
+            <Button
+              variant={activeSection === "previews" ? "secondary" : "ghost"}
+              onClick={() => setActiveSection("previews")}
+              className={activeSection === "previews" ? "" : "text-white/70 hover:text-white hover:bg-white/10"}
+            >
+              Previews
+            </Button>
+            <Button
+              variant={activeSection === "pricing" ? "secondary" : "ghost"}
+              onClick={() => setActiveSection("pricing")}
+              className={activeSection === "pricing" ? "" : "text-white/70 hover:text-white hover:bg-white/10"}
+            >
+              Pricing
+            </Button>
+          </div>
+        </div>
+      </header>
 
-      {/* Screenshot Showcase Sections */}
-      {currentSection.type === "showcase" && (
-        <section className="min-h-screen py-12 sm:py-20 px-4 sm:px-6">
+      {/* Hero */}
+      <section className="py-12 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <Badge className="bg-white/20 text-white border-white/30 mb-6">
+            Interactive Proposal
+          </Badge>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+            Your New Digital Platform
+          </h1>
+          <p className="text-xl text-white/80 max-w-2xl mx-auto">
+            Click through to preview each component. These are static design previews 
+            showcasing the look and feel of your new system.
+          </p>
+        </div>
+      </section>
+
+      {/* Previews Section */}
+      {activeSection === "previews" && (
+        <section className="py-8 px-6">
           <div className="max-w-6xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-8 sm:mb-12">
-              <Badge className="bg-white/20 text-white border-white/30 mb-4">
-                {currentIndex} of {totalSections - 2}
-              </Badge>
-              <h2 className="text-2xl sm:text-4xl font-bold text-white mb-3">
-                {currentSection.title}
-              </h2>
-              <p className="text-accent text-lg sm:text-xl mb-2">{currentSection.subtitle}</p>
-              <p className="text-white/60 max-w-2xl mx-auto text-sm sm:text-base">
-                {currentSection.description}
-              </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              {previews.map((preview) => (
+                <Link key={preview.id} href={preview.href}>
+                  <Card className="h-full bg-white/10 border-white/20 hover:bg-white/20 hover:border-accent/50 transition-all cursor-pointer group backdrop-blur">
+                    <CardContent className="p-6">
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className="w-14 h-14 rounded-xl bg-accent/20 text-accent flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-colors">
+                          {preview.icon}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-semibold text-white mb-1">{preview.title}</h3>
+                          <p className="text-white/60 text-sm">{preview.description}</p>
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {preview.features.map((feature) => (
+                          <span 
+                            key={feature}
+                            className="text-xs bg-white/10 text-white/80 px-2 py-1 rounded-full"
+                          >
+                            {feature}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-4 flex items-center text-accent group-hover:text-white transition-colors">
+                        <span className="text-sm font-medium">View Preview</span>
+                        <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
             </div>
 
-            {/* Screenshot with annotations */}
-            <div className="grid lg:grid-cols-5 gap-6 sm:gap-8 items-start">
-              {/* Screenshot */}
-              <div className={`${currentSection.isMobile ? 'lg:col-span-2' : 'lg:col-span-3'} order-2 lg:order-1`}>
-                <div className={`relative ${currentSection.isMobile ? 'flex justify-center gap-4' : ''}`}>
-                  {currentSection.isMobile ? (
-                    <>
-                      {/* Phone mockup 1 */}
-                      <div className="relative w-[160px] sm:w-[200px]">
-                        <div className="bg-gray-900 rounded-[2rem] p-2 shadow-2xl">
-                          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-5 bg-gray-900 rounded-b-xl z-10" />
-                          <div className="rounded-[1.5rem] overflow-hidden bg-white">
-                            <Image
-                              src={currentSection.screenshot || ""}
-                              alt="Mobile Dashboard"
-                              width={400}
-                              height={700}
-                              className="w-full h-auto"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      {/* Phone mockup 2 */}
-                      <div className="relative w-[140px] sm:w-[180px] mt-8 hidden sm:block">
-                        <div className="bg-gray-800 rounded-[1.75rem] p-2 shadow-xl">
-                          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 h-4 bg-gray-800 rounded-b-lg z-10" />
-                          <div className="rounded-[1.25rem] overflow-hidden bg-white">
-                            <Image
-                              src={currentSection.screenshotAlt || ""}
-                              alt="Mobile Profile"
-                              width={400}
-                              height={700}
-                              className="w-full h-auto"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
-                      <div className="bg-gray-100 px-4 py-2 flex items-center gap-2">
-                        <div className="flex gap-1.5">
-                          <div className="w-3 h-3 rounded-full bg-red-400" />
-                          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                          <div className="w-3 h-3 rounded-full bg-green-400" />
-                        </div>
-                        <div className="flex-1 bg-white rounded px-3 py-1 text-xs text-gray-400 text-center">
-                          unitedrefuahhs.org
-                        </div>
-                      </div>
-                      {currentSection.screenshot ? (
-                        <Image
-                          src={currentSection.screenshot}
-                          alt={currentSection.title || "Screenshot"}
-                          width={1200}
-                          height={800}
-                          className="w-full h-auto"
-                        />
-                      ) : (
-                        <div className="aspect-video bg-gray-200 flex items-center justify-center text-gray-400">
-                          Screenshot placeholder
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
+            {/* Included Features */}
+            <div className="mt-12 bg-white/10 backdrop-blur rounded-2xl p-8">
+              <h2 className="text-xl font-semibold text-white mb-6 text-center">Also Included</h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { icon: "🔍", title: "SEO Optimization", desc: "Rank higher on Google" },
+                  { icon: "⚡", title: "Fast Load Times", desc: "Under 2 second loads" },
+                  { icon: "📱", title: "Mobile-First", desc: "Works on all devices" },
+                  { icon: "🔒", title: "Secure", desc: "HTTPS + encryption" },
+                ].map((item) => (
+                  <div key={item.title} className="text-center">
+                    <span className="text-3xl mb-2 block">{item.icon}</span>
+                    <h3 className="font-medium text-white">{item.title}</h3>
+                    <p className="text-xs text-white/60">{item.desc}</p>
+                  </div>
+                ))}
               </div>
-
-              {/* Features */}
-              <div className={`${currentSection.isMobile ? 'lg:col-span-3' : 'lg:col-span-2'} order-1 lg:order-2`}>
-                <h3 className="text-white font-semibold mb-4 text-lg">Key Features:</h3>
-                <div className="space-y-4">
-                  {currentSection.features?.map((feature, idx) => (
-                    <div 
-                      key={idx}
-                      className="bg-white/10 backdrop-blur rounded-xl p-4"
-                    >
-                      <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-accent/20 text-accent flex items-center justify-center flex-shrink-0 font-bold text-sm">
-                          {idx + 1}
-                        </div>
-                        <div>
-                          <h4 className="text-white font-medium">{feature.label}</h4>
-                          <p className="text-white/60 text-sm mt-1">{feature.description}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Navigation */}
-            <div className="flex justify-between mt-8 sm:mt-12">
-              <Button 
-                variant="ghost" 
-                onClick={prevSection} 
-                className="text-white/70 hover:text-white hover:bg-white/10"
-              >
-                ← Back
-              </Button>
-              <Button onClick={nextSection} variant="secondary">
-                {currentIndex < sections.length - 3 ? "Next Feature →" : "View Pricing →"}
-              </Button>
             </div>
           </div>
         </section>
       )}
 
       {/* Pricing Section */}
-      {currentSection.type === "pricing" && (
-        <section className="min-h-screen py-20 px-6">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <Badge className="bg-white/20 text-white border-white/30 mb-4">
-                Investment
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                Choose Your Package
-              </h2>
-              <p className="text-white/70 max-w-2xl mx-auto">
-                Two options designed to fit your timeline and integration needs.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
+      {activeSection === "pricing" && (
+        <section className="py-8 px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
               {packages.map((pkg) => (
                 <Card 
                   key={pkg.name}
@@ -394,22 +227,22 @@ export default function ProposalPage() {
                       <Badge className="bg-accent text-white border-0">Recommended</Badge>
                     </div>
                   )}
-                  <CardContent className="p-8">
-                    <h3 className="text-2xl font-bold text-foreground mb-2">{pkg.name}</h3>
-                    <p className="text-muted-foreground mb-4">{pkg.description}</p>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold text-foreground mb-1">{pkg.name}</h3>
+                    <p className="text-muted-foreground text-sm mb-4">{pkg.description}</p>
                     
-                    <div className="mb-6">
-                      <span className="text-3xl font-bold text-primary">{pkg.price}</span>
+                    <div className="mb-4">
+                      <span className="text-2xl font-bold text-primary">{pkg.price}</span>
                     </div>
 
-                    <div className="text-sm text-muted-foreground mb-6">
-                      Timeline: <span className="text-foreground font-medium">{pkg.timeline}</span>
-                    </div>
+                    <p className="text-xs text-muted-foreground mb-4">
+                      Timeline: <span className="font-medium text-foreground">{pkg.timeline}</span>
+                    </p>
 
-                    <ul className="space-y-3">
+                    <ul className="space-y-2">
                       {pkg.features.map((feature) => (
-                        <li key={feature} className="flex items-start gap-2 text-foreground">
-                          <svg className="w-5 h-5 text-success flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                        <li key={feature} className="flex items-center gap-2 text-sm">
+                          <svg className="w-4 h-4 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                           </svg>
                           {feature}
@@ -424,105 +257,40 @@ export default function ProposalPage() {
             <Card className="bg-white/10 border-white/20 backdrop-blur">
               <CardContent className="p-6 text-center">
                 <p className="text-white/80">
-                  <strong className="text-white">Ongoing Support:</strong> Optional hosting & maintenance at $500-1,000/month.
+                  <strong className="text-white">Ongoing:</strong> Hosting & maintenance $500-1,000/month
                 </p>
               </CardContent>
             </Card>
-
-            <div className="flex justify-between mt-12">
-              <Button variant="ghost" onClick={prevSection} className="text-white/70 hover:text-white hover:bg-white/10">
-                ← Back
-              </Button>
-              <Button onClick={nextSection} variant="secondary">
-                Next Steps →
-              </Button>
-            </div>
           </div>
         </section>
       )}
 
-      {/* CTA Section */}
-      {currentSection.type === "cta" && (
-        <section className="min-h-screen flex items-center justify-center py-20 px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="w-20 h-20 rounded-full bg-accent flex items-center justify-center mx-auto mb-8">
-              <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+      {/* CTA */}
+      <section className="py-12 px-6">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-white mb-4">Ready to Move Forward?</h2>
+          <p className="text-white/70 mb-8">
+            Schedule a call to discuss your specific requirements and see a live demo.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" variant="secondary" className="font-semibold">
+              <svg className="mr-2 w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
               </svg>
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Ready to See the Full Demo?
-            </h2>
-            
-            <p className="text-xl text-white/80 mb-8">
-              Schedule a call to walk through the complete platform 
-              and discuss your specific requirements.
-            </p>
-
-            <Card className="bg-white/10 border-white/20 backdrop-blur mb-8 text-left">
-              <CardContent className="p-8">
-                <h3 className="text-lg font-semibold text-white mb-4">What&apos;s Next:</h3>
-                <ol className="space-y-4">
-                  <li className="flex items-start gap-4">
-                    <span className="w-8 h-8 rounded-full bg-accent/20 text-accent flex items-center justify-center flex-shrink-0 font-bold">1</span>
-                    <div>
-                      <p className="text-white font-medium">Live Demo Call</p>
-                      <p className="text-white/60 text-sm">See the full working platform with all features</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <span className="w-8 h-8 rounded-full bg-accent/20 text-accent flex items-center justify-center flex-shrink-0 font-bold">2</span>
-                    <div>
-                      <p className="text-white font-medium">Requirements Discussion</p>
-                      <p className="text-white/60 text-sm">Map out your existing systems and integrations</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <span className="w-8 h-8 rounded-full bg-accent/20 text-accent flex items-center justify-center flex-shrink-0 font-bold">3</span>
-                    <div>
-                      <p className="text-white font-medium">Custom Proposal</p>
-                      <p className="text-white/60 text-sm">Tailored scope and timeline based on your needs</p>
-                    </div>
-                  </li>
-                </ol>
-              </CardContent>
-            </Card>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <Button size="lg" variant="secondary" className="font-semibold px-8">
-                <svg className="mr-2 w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-                </svg>
-                Schedule Demo Call
-              </Button>
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
-                <svg className="mr-2 w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                </svg>
-                Email Us
-              </Button>
-            </div>
-
-            <p className="text-white/50 text-sm">
-              CorSynq • AI-Powered Business Solutions
-            </p>
-
-            <Button 
-              variant="ghost" 
-              onClick={() => setCurrentIndex(0)} 
-              className="mt-8 text-white/50 hover:text-white hover:bg-white/10"
-            >
-              ← Restart Preview
+              Schedule Demo
+            </Button>
+            <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+              <svg className="mr-2 w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+              </svg>
+              Call Now
             </Button>
           </div>
-        </section>
-      )}
-
-      {/* Keyboard navigation hint */}
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 text-white/40 text-sm hidden lg:block">
-        Use arrow keys or click to navigate
-      </div>
+          <p className="text-white/40 text-sm mt-8">
+            Prepared by CorSynq • February 2026
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
