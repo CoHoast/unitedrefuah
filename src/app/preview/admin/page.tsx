@@ -7,7 +7,19 @@ import { Badge } from "@/components/ui/badge";
 
 // Static admin dashboard preview with full sidebar navigation
 
-const sidebarItems = [
+interface SidebarItem {
+  icon: string;
+  label: string;
+  active?: boolean;
+  badge?: number;
+}
+
+interface SidebarSection {
+  section: string;
+  items: SidebarItem[];
+}
+
+const sidebarItems: SidebarSection[] = [
   { 
     section: "Overview",
     items: [

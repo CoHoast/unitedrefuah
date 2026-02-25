@@ -7,7 +7,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-const previews = [
+interface PreviewItem {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
+  icon: React.ReactNode;
+  features: string[];
+  badge?: string;
+}
+
+const previews: PreviewItem[] = [
   {
     id: "marketing",
     title: "Marketing Website",
