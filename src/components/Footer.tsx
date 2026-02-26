@@ -5,24 +5,24 @@ import { Separator } from "@/components/ui/separator";
 const footerLinks = {
   information: [
     { name: "Application", href: "/apply" },
-    { name: "Sharing Guidelines", href: "/guidelines" },
-    { name: "FAQs", href: "#faq" },
-    { name: "Tax Information", href: "/tax-info" },
+    { name: "Sharing Guidelines", href: "/sharing-guidelines" },
+    { name: "FAQs", href: "/faqs" },
+    { name: "Tax Information", href: "/tax-information" },
   ],
   members: [
-    { name: "Member Portal", href: "/login" },
-    { name: "Submit Sharing Request", href: "/submit-request" },
-    { name: "TeleRefuah 24/7", href: "/telemedicine" },
+    { name: "Member Portal", href: "/member" },
+    { name: "Submit Sharing Request", href: "/member/submit" },
+    { name: "TeleRefuah 24/7", href: "/telerefuah" },
     { name: "Claim Status", href: "/claim-status" },
   ],
   providers: [
     { name: "Billing & Payment", href: "/providers/billing" },
     { name: "Provider Services", href: "/providers" },
-    { name: "Become a Provider", href: "/providers/join" },
-    { name: "Claim Status Request", href: "/providers/claims" },
+    { name: "Become a Provider", href: "/providers/become-preferred" },
+    { name: "Claim Status Request", href: "/providers/claim-status" },
   ],
   company: [
-    { name: "About Us", href: "#about" },
+    { name: "About Us", href: "/about" },
     { name: "Contact Us", href: "/contact" },
     { name: "Privacy Policy", href: "/privacy" },
     { name: "Legal", href: "/legal" },
