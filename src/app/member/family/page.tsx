@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -121,8 +122,8 @@ export default function FamilyPage() {
                   </div>
                 </div>
                 <div className="mt-4 flex gap-2">
-                  <Button variant="outline" size="sm" className="flex-1">
-                    View ID Card
+                  <Button variant="outline" size="sm" className="flex-1" asChild>
+                    <Link href="/member/id-card">View ID Card</Link>
                   </Button>
                   <Button variant="ghost" size="sm">
                     Edit

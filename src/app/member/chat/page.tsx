@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface Message {
   id: number;
@@ -88,88 +89,180 @@ export default function ChatPage() {
     }, 1500);
   };
 
-  return (
-    <div className="flex flex-col h-[calc(100vh-8rem)]">
-      {/* Header */}
-      <div className="p-4 border-b bg-white">
-        <h1 className="text-lg font-bold text-gray-900">Help & Support</h1>
-        <p className="text-gray-500 text-sm">Ask me anything about your membership</p>
-      </div>
-
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.map((message) => (
+  // Chat Messages Component (shared between desktop and mobile)
+  const ChatMessages = () => (
+    <>
+      {messages.map((message) => (
+        <div
+          key={message.id}
+          className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+        >
           <div
-            key={message.id}
-            className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+            className={`max-w-[85%] rounded-2xl px-4 py-3 ${
+              message.role === "user"
+                ? "bg-primary text-white rounded-br-md"
+                : "bg-gray-100 text-gray-900 rounded-bl-md"
+            }`}
           >
-            <div
-              className={`max-w-[85%] rounded-2xl px-4 py-3 ${
-                message.role === "user"
-                  ? "bg-primary text-white rounded-br-md"
-                  : "bg-gray-100 text-gray-900 rounded-bl-md"
-              }`}
-            >
-              <p className="text-sm whitespace-pre-line">{message.content}</p>
-              <p className={`text-xs mt-1 ${
-                message.role === "user" ? "text-white/70" : "text-gray-400"
-              }`}>
-                {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-              </p>
-            </div>
+            <p className="text-sm whitespace-pre-line">{message.content}</p>
+            <p className={`text-xs mt-1 ${
+              message.role === "user" ? "text-white/70" : "text-gray-400"
+            }`}>
+              {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            </p>
           </div>
-        ))}
+        </div>
+      ))}
 
-        {isTyping && (
-          <div className="flex justify-start">
-            <div className="bg-gray-100 rounded-2xl rounded-bl-md px-4 py-3">
-              <div className="flex space-x-1">
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
-              </div>
+      {isTyping && (
+        <div className="flex justify-start">
+          <div className="bg-gray-100 rounded-2xl rounded-bl-md px-4 py-3">
+            <div className="flex space-x-1">
+              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
             </div>
-          </div>
-        )}
-
-        <div ref={messagesEndRef} />
-      </div>
-
-      {/* Suggested Questions (show only at start) */}
-      {messages.length <= 1 && (
-        <div className="px-4 pb-2">
-          <p className="text-xs text-gray-500 mb-2">Suggested questions:</p>
-          <div className="flex flex-wrap gap-2">
-            {suggestedQuestions.map((q, i) => (
-              <button
-                key={i}
-                onClick={() => handleSend(q)}
-                className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-full transition-colors"
-              >
-                {q}
-              </button>
-            ))}
           </div>
         </div>
       )}
 
-      {/* Input */}
-      <div className="p-4 border-t bg-white">
-        <div className="flex gap-2">
-          <Input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSend()}
-            placeholder="Type your question..."
-            className="flex-1"
-          />
-          <Button onClick={() => handleSend()} disabled={!input.trim() || isTyping}>
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-            </svg>
-          </Button>
+      <div ref={messagesEndRef} />
+    </>
+  );
+
+  // Suggested Questions Component
+  const SuggestedQuestions = () => (
+    messages.length <= 1 && (
+      <div className="px-4 pb-2">
+        <p className="text-xs text-gray-500 mb-2">Suggested questions:</p>
+        <div className="flex flex-wrap gap-2">
+          {suggestedQuestions.map((q, i) => (
+            <button
+              key={i}
+              onClick={() => handleSend(q)}
+              className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-full transition-colors"
+            >
+              {q}
+            </button>
+          ))}
         </div>
       </div>
+    )
+  );
+
+  // Chat Input Component
+  const ChatInput = () => (
+    <div className="flex gap-2">
+      <Input
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && handleSend()}
+        placeholder="Type your question..."
+        className="flex-1"
+      />
+      <Button onClick={() => handleSend()} disabled={!input.trim() || isTyping}>
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+        </svg>
+      </Button>
     </div>
+  );
+
+  return (
+    <>
+      {/* Desktop Layout */}
+      <div className="hidden lg:block">
+        <Card className="h-[calc(100vh-12rem)]">
+          <div className="flex flex-col h-full">
+            {/* Header */}
+            <div className="p-4 border-b">
+              <h2 className="text-lg font-bold text-gray-900">Help & Support</h2>
+              <p className="text-gray-500 text-sm">Ask me anything about your membership</p>
+            </div>
+
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              <ChatMessages />
+            </div>
+
+            {/* Suggested Questions */}
+            <SuggestedQuestions />
+
+            {/* Input */}
+            <div className="p-4 border-t">
+              <ChatInput />
+            </div>
+          </div>
+        </Card>
+
+        {/* Quick Help Cards */}
+        <div className="grid grid-cols-3 gap-4 mt-6">
+          <Card>
+            <CardContent className="p-4 text-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                </svg>
+              </div>
+              <h3 className="font-semibold">Call Us</h3>
+              <p className="text-sm text-muted-foreground">Mon-Fri, 8:30am-7pm EST</p>
+              <a href="tel:4407720700" className="text-primary font-medium text-sm block mt-2">
+                (440) 772-0700
+              </a>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-4 text-center">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg className="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                </svg>
+              </div>
+              <h3 className="font-semibold">Email Us</h3>
+              <p className="text-sm text-muted-foreground">We respond within 24 hours</p>
+              <a href="mailto:info@unitedrefuahhs.org" className="text-primary font-medium text-sm block mt-2">
+                info@unitedrefuahhs.org
+              </a>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-4 text-center">
+              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg className="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                </svg>
+              </div>
+              <h3 className="font-semibold">Sharing Guidelines</h3>
+              <p className="text-sm text-muted-foreground">Learn what&apos;s eligible</p>
+              <a href="/sharing-guidelines" className="text-primary font-medium text-sm block mt-2">
+                View Guidelines
+              </a>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      {/* Mobile Layout */}
+      <div className="lg:hidden flex flex-col h-[calc(100vh-10rem)]">
+        {/* Header */}
+        <div className="p-4 border-b bg-white">
+          <h1 className="text-lg font-bold text-gray-900">Help & Support</h1>
+          <p className="text-gray-500 text-sm">Ask me anything about your membership</p>
+        </div>
+
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <ChatMessages />
+        </div>
+
+        {/* Suggested Questions */}
+        <SuggestedQuestions />
+
+        {/* Input */}
+        <div className="p-4 border-t bg-white">
+          <ChatInput />
+        </div>
+      </div>
+    </>
   );
 }

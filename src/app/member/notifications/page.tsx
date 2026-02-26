@@ -1,10 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-const notifications = [
+const initialNotifications = [
   {
     id: 1,
     type: "claim",
@@ -91,7 +92,18 @@ const typeIcons: Record<string, { icon: React.ReactNode; bg: string }> = {
 };
 
 export default function NotificationsPage() {
+  const [notifications, setNotifications] = useState(initialNotifications);
   const unreadCount = notifications.filter(n => !n.read).length;
+
+  const markAllAsRead = () => {
+    setNotifications(notifications.map(n => ({ ...n, read: true })));
+  };
+
+  const markAsRead = (id: number) => {
+    setNotifications(notifications.map(n => 
+      n.id === id ? { ...n, read: true } : n
+    ));
+  };
 
   return (
     <>
@@ -104,7 +116,7 @@ export default function NotificationsPage() {
               {unreadCount > 0 ? `You have ${unreadCount} unread notifications` : "All caught up!"}
             </p>
           </div>
-          <Button variant="outline">
+          <Button variant="outline" onClick={markAllAsRead} disabled={unreadCount === 0}>
             Mark All as Read
           </Button>
         </div>
@@ -114,9 +126,10 @@ export default function NotificationsPage() {
             {notifications.map((notification) => (
               <div 
                 key={notification.id} 
-                className={`p-5 flex items-start gap-4 hover:bg-muted/30 transition-colors ${
+                className={`p-5 flex items-start gap-4 hover:bg-muted/30 transition-colors cursor-pointer ${
                   !notification.read ? "bg-primary/5" : ""
                 }`}
+                onClick={() => markAsRead(notification.id)}
               >
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${typeIcons[notification.type].bg}`}>
                   {typeIcons[notification.type].icon}
@@ -146,13 +159,19 @@ export default function NotificationsPage() {
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold">Notifications</h1>
           {unreadCount > 0 && (
-            <Badge className="bg-primary">{unreadCount} new</Badge>
+            <Button variant="outline" size="sm" onClick={markAllAsRead}>
+              Mark All Read
+            </Button>
           )}
         </div>
 
         <div className="space-y-3">
           {notifications.map((notification) => (
-            <Card key={notification.id} className={!notification.read ? "border-primary/30 bg-primary/5" : ""}>
+            <Card 
+              key={notification.id} 
+              className={`cursor-pointer ${!notification.read ? "border-primary/30 bg-primary/5" : ""}`}
+              onClick={() => markAsRead(notification.id)}
+            >
               <CardContent className="p-4">
                 <div className="flex items-start gap-3">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${typeIcons[notification.type].bg}`}>

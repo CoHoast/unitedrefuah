@@ -120,11 +120,11 @@ export default function IDCardPage() {
                     </div>
                     <div>
                       <p className="font-semibold">TeleRefuah 24/7</p>
-                      <p className="text-primary">(800) 555-0199</p>
+                      <p className="text-primary">(440) 772-0700</p>
                     </div>
                     <div>
                       <p className="font-semibold">Submit Claims</p>
-                      <p className="text-muted-foreground text-xs">unitedrefuahhs.org/member</p>
+                      <p className="text-muted-foreground text-xs">unitedrefuahhs.org</p>
                     </div>
                     <div>
                       <p className="font-semibold">Fax</p>

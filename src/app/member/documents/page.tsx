@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -64,6 +65,12 @@ const categories = [
 ];
 
 export default function DocumentsPage() {
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  
+  const filteredDocuments = selectedCategory === "all" 
+    ? documents 
+    : documents.filter(doc => doc.category === selectedCategory);
+
   return (
     <>
       {/* Desktop */}
@@ -86,10 +93,16 @@ export default function DocumentsPage() {
           {categories.map((cat) => (
             <Button
               key={cat.id}
-              variant={cat.id === "all" ? "default" : "outline"}
+              variant={selectedCategory === cat.id ? "default" : "outline"}
               size="sm"
+              onClick={() => setSelectedCategory(cat.id)}
             >
               {cat.label}
+              {cat.id !== "all" && (
+                <span className="ml-1.5 text-xs opacity-70">
+                  ({documents.filter(d => d.category === cat.id).length})
+                </span>
+              )}
             </Button>
           ))}
         </div>
@@ -108,7 +121,7 @@ export default function DocumentsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y">
-                {documents.map((doc) => (
+                {filteredDocuments.map((doc) => (
                   <tr key={doc.id} className="hover:bg-muted/30">
                     <td className="p-4">
                       <div className="flex items-center gap-3">
@@ -150,9 +163,10 @@ export default function DocumentsPage() {
           {categories.map((cat) => (
             <Button
               key={cat.id}
-              variant={cat.id === "all" ? "default" : "outline"}
+              variant={selectedCategory === cat.id ? "default" : "outline"}
               size="sm"
               className="flex-shrink-0"
+              onClick={() => setSelectedCategory(cat.id)}
             >
               {cat.label}
             </Button>
@@ -161,7 +175,7 @@ export default function DocumentsPage() {
 
         {/* Document cards */}
         <div className="space-y-3">
-          {documents.map((doc) => (
+          {filteredDocuments.map((doc) => (
             <Card key={doc.id}>
               <CardContent className="p-4">
                 <div className="flex items-start justify-between">

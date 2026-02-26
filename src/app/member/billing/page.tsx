@@ -11,16 +11,16 @@ const paymentMethod = {
 };
 
 const payments = [
-  { id: 1, date: "Feb 1, 2024", amount: 495, status: "paid", method: "Visa •••• 4242" },
-  { id: 2, date: "Jan 1, 2024", amount: 495, status: "paid", method: "Visa •••• 4242" },
-  { id: 3, date: "Dec 1, 2023", amount: 495, status: "paid", method: "Visa •••• 4242" },
-  { id: 4, date: "Nov 1, 2023", amount: 495, status: "paid", method: "Visa •••• 4242" },
-  { id: 5, date: "Oct 1, 2023", amount: 495, status: "paid", method: "Visa •••• 4242" },
-  { id: 6, date: "Sep 1, 2023", amount: 495, status: "paid", method: "Visa •••• 4242" },
+  { id: 1, date: "Feb 1, 2025", amount: 495, status: "paid", method: "Visa •••• 4242" },
+  { id: 2, date: "Jan 1, 2025", amount: 495, status: "paid", method: "Visa •••• 4242" },
+  { id: 3, date: "Dec 1, 2024", amount: 495, status: "paid", method: "Visa •••• 4242" },
+  { id: 4, date: "Nov 1, 2024", amount: 495, status: "paid", method: "Visa •••• 4242" },
+  { id: 5, date: "Oct 1, 2024", amount: 495, status: "paid", method: "Visa •••• 4242" },
+  { id: 6, date: "Sep 1, 2024", amount: 495, status: "paid", method: "Visa •••• 4242" },
 ];
 
 const upcomingPayment = {
-  date: "Mar 1, 2024",
+  date: "Mar 1, 2025",
   amount: 495,
 };
 
