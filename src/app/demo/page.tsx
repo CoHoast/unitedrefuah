@@ -311,12 +311,12 @@ export default function DemoPage() {
         )}
       </div>
 
-      {/* Cards Grid - 2x2 layout on desktop, 1 column on mobile */}
+      {/* Cards Grid - 4 columns on desktop, responsive on smaller screens */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-        gap: '24px',
-        maxWidth: '900px',
+        gridTemplateColumns: 'repeat(4, 1fr)',
+        gap: '16px',
+        maxWidth: '1200px',
         margin: '0 auto',
       }}>
         
@@ -328,13 +328,13 @@ export default function DemoPage() {
           boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
           display: 'flex',
           flexDirection: 'column',
-          minHeight: '480px',
+          minHeight: '400px',
         }}>
           <div style={{
             borderRadius: '12px',
             marginBottom: '20px',
             overflow: 'hidden',
-            height: '180px',
+            height: '140px',
             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
             flexShrink: 0,
           }}>
@@ -376,13 +376,13 @@ export default function DemoPage() {
           boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
           display: 'flex',
           flexDirection: 'column',
-          minHeight: '480px',
+          minHeight: '400px',
         }}>
           <div style={{
             borderRadius: '12px',
             marginBottom: '20px',
             overflow: 'hidden',
-            height: '180px',
+            height: '140px',
             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
             flexShrink: 0,
           }}>
@@ -424,7 +424,7 @@ export default function DemoPage() {
           boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
           display: 'flex',
           flexDirection: 'column',
-          minHeight: '480px',
+          minHeight: '400px',
         }}>
           <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '8px', color: '#1a1a1a', textAlign: 'center' }}>
             Member Mobile App
@@ -477,13 +477,13 @@ export default function DemoPage() {
           boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
           display: 'flex',
           flexDirection: 'column',
-          minHeight: '480px',
+          minHeight: '400px',
         }}>
           <div style={{
             borderRadius: '12px',
             marginBottom: '20px',
             overflow: 'hidden',
-            height: '180px',
+            height: '140px',
             background: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)',
             display: 'flex',
             alignItems: 'center',
