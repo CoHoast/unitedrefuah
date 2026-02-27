@@ -387,18 +387,14 @@ export default function DemoPage() {
             marginBottom: '20px',
             overflow: 'hidden',
             height: '180px',
-            background: 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
             flexShrink: 0,
           }}>
-            <div style={{ textAlign: 'center', color: 'white' }}>
-              <svg width="48" height="48" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" style={{ margin: '0 auto 8px' }}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25"/>
-              </svg>
-              <div style={{ fontSize: '14px', fontWeight: 600 }}>Desktop Dashboard</div>
-            </div>
+            <img 
+              src="/demo-previews/member-dashboard-preview.jpg" 
+              alt="Member Dashboard Preview"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top left' }}
+            />
           </div>
           
           <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '8px', color: '#1a1a1a' }}>
