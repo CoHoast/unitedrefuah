@@ -208,7 +208,7 @@ const DemoButton = ({
 
 export default function DemoPage() {
   const [currentTime, setCurrentTime] = useState('');
-  const [activeModal, setActiveModal] = useState<'marketing' | 'member' | 'admin' | null>(null);
+  const [activeModal, setActiveModal] = useState<'marketing' | 'memberDesktop' | 'memberMobile' | 'admin' | null>(null);
   
   useEffect(() => {
     const updateTime = () => {
@@ -230,7 +230,8 @@ export default function DemoPage() {
   
   const DEMO_LINKS = {
     marketing: BASE_URL || '/',
-    member: `${BASE_URL}/member`,
+    memberDesktop: `${BASE_URL}/member`,
+    memberMobile: `${BASE_URL}/member`,
     admin: `${BASE_URL}/admin`,
   };
 
@@ -310,12 +311,12 @@ export default function DemoPage() {
         )}
       </div>
 
-      {/* Cards Grid */}
+      {/* Cards Grid - 2x2 layout on desktop, 1 column on mobile */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
         gap: '24px',
-        maxWidth: '1100px',
+        maxWidth: '900px',
         margin: '0 auto',
       }}>
         
@@ -352,7 +353,7 @@ export default function DemoPage() {
             Marketing Website
           </h2>
           <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.6, flex: 1 }}>
-            Public-facing website where prospective members learn about our health sharing community and apply.
+            Public-facing website where prospective members learn about health sharing and apply to join.
           </p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' }}>
@@ -371,7 +372,7 @@ export default function DemoPage() {
           </div>
         </div>
 
-        {/* Member Portal Card */}
+        {/* Member Desktop Dashboard Card */}
         <div style={{
           background: 'white',
           borderRadius: '20px',
@@ -394,27 +395,27 @@ export default function DemoPage() {
           }}>
             <div style={{ textAlign: 'center', color: 'white' }}>
               <svg width="48" height="48" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" style={{ margin: '0 auto 8px' }}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25"/>
               </svg>
-              <div style={{ fontSize: '14px', fontWeight: 600 }}>Member Portal</div>
+              <div style={{ fontSize: '14px', fontWeight: 600 }}>Desktop Dashboard</div>
             </div>
           </div>
           
           <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '8px', color: '#1a1a1a' }}>
-            Member Portal
+            Member Dashboard
           </h2>
           <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.6, flex: 1 }}>
-            Where members manage their sharing, submit medical needs, and track their healthcare journey.
+            Full-featured desktop experience for managing membership, submitting needs, and tracking claims.
           </p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' }}>
-            <DemoButton href={DEMO_LINKS.member} primary>
-              <span>Open Portal</span>
+            <DemoButton href={DEMO_LINKS.memberDesktop} primary>
+              <span>Open Dashboard</span>
               <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
               </svg>
             </DemoButton>
-            <DemoButton onClick={() => setActiveModal('member')}>
+            <DemoButton onClick={() => setActiveModal('memberDesktop')}>
               <span>More Info</span>
               <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -423,7 +424,7 @@ export default function DemoPage() {
           </div>
         </div>
 
-        {/* Admin Dashboard Card */}
+        {/* Member Mobile App Card */}
         <div style={{
           background: 'white',
           borderRadius: '20px',
@@ -434,10 +435,10 @@ export default function DemoPage() {
           minHeight: '480px',
         }}>
           <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '8px', color: '#1a1a1a', textAlign: 'center' }}>
-            Admin Dashboard
+            Member Mobile App
           </h2>
           <p style={{ fontSize: '14px', color: '#666', marginBottom: '16px', lineHeight: 1.6, textAlign: 'center' }}>
-            Staff portal for document processing and member management.
+            Native-like PWA for on-the-go access to your membership.
           </p>
           
           <div style={{
@@ -445,24 +446,77 @@ export default function DemoPage() {
             flexDirection: 'column',
             alignItems: 'center',
             padding: '20px',
-            background: '#f8fafc',
+            background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
             borderRadius: '16px',
             flex: 1,
             justifyContent: 'center',
           }}>
             <img 
-              src={getQRCodeUrl(DEMO_LINKS.admin, 140)}
-              alt="Scan to open admin dashboard"
+              src={getQRCodeUrl(DEMO_LINKS.memberMobile, 140)}
+              alt="Scan to open member mobile app"
               style={{ width: '140px', height: '140px', borderRadius: '8px' }}
             />
-            <p style={{ fontSize: '12px', color: '#888', marginTop: '12px', textAlign: 'center' }}>
+            <p style={{ fontSize: '12px', color: '#166534', marginTop: '12px', textAlign: 'center' }}>
               Scan with your phone camera
             </p>
           </div>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' }}>
+            <DemoButton href={DEMO_LINKS.memberMobile} primary>
+              <span>Open App</span>
+              <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </DemoButton>
+            <DemoButton onClick={() => setActiveModal('memberMobile')}>
+              <span>More Info</span>
+              <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </DemoButton>
+          </div>
+        </div>
+
+        {/* Admin Portal Card */}
+        <div style={{
+          background: 'white',
+          borderRadius: '20px',
+          padding: '24px',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '480px',
+        }}>
+          <div style={{
+            borderRadius: '12px',
+            marginBottom: '20px',
+            overflow: 'hidden',
+            height: '180px',
+            background: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+          }}>
+            <div style={{ textAlign: 'center', color: 'white' }}>
+              <svg width="48" height="48" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" style={{ margin: '0 auto 8px' }}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+              </svg>
+              <div style={{ fontSize: '14px', fontWeight: 600 }}>Admin Portal</div>
+            </div>
+          </div>
+          
+          <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '8px', color: '#1a1a1a' }}>
+            Admin Portal
+          </h2>
+          <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.6, flex: 1 }}>
+            Staff dashboard for document processing, member management, and workflow tracking.
+          </p>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' }}>
             <DemoButton href={DEMO_LINKS.admin} primary>
-              <span>Open Dashboard</span>
+              <span>Open Portal</span>
               <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
               </svg>
@@ -552,83 +606,81 @@ export default function DemoPage() {
         </div>
       </InfoModal>
 
-      {/* Member Portal Modal */}
+      {/* Member Desktop Dashboard Modal */}
       <InfoModal 
-        isOpen={activeModal === 'member'} 
+        isOpen={activeModal === 'memberDesktop'} 
         onClose={() => setActiveModal(null)}
-        title="Member Portal"
+        title="Member Dashboard"
       >
         <p style={{ fontSize: '16px', color: '#444', lineHeight: 1.7, marginBottom: '20px' }}>
-          The Member Portal is a <strong>Progressive Web App (PWA)</strong> that gives members complete control over their healthcare sharing experience—accessible from any device.
+          The Member Dashboard provides a comprehensive desktop experience for managing every aspect of your healthcare sharing membership.
         </p>
         
-        <SectionTitle>Dashboard Features</SectionTitle>
+        <SectionTitle>Dashboard Overview</SectionTitle>
+        
+        <FeatureItem 
+          icon={FeatureIcons.chart}
+          title="At-a-Glance Summary"
+          description="See your sharing status, recent activity, and important notifications the moment you log in."
+        />
         
         <FeatureItem 
           icon={FeatureIcons.idCard}
           title="Digital ID Card"
-          description="Access your member ID card anytime. Show it at the doctor's office or pharmacy directly from your phone."
+          description="Access and print your member ID card. View your member ID, group number, and TeleRefuah contact information."
+        />
+        
+        <FeatureItem 
+          icon={FeatureIcons.document}
+          title="Claims Management"
+          description="View all submitted needs with detailed status tracking. See sharing amounts, processing dates, and any required actions."
         />
         
         <FeatureItem 
           icon={FeatureIcons.upload}
           title="Submit Medical Needs"
-          description="Upload bills and medical documents directly through the portal. Track submission status in real-time."
+          description="Upload bills, EOBs, and medical documents. Add notes and track submission status through the entire process."
         />
         
-        <FeatureItem 
-          icon={FeatureIcons.document}
-          title="Claims Tracking"
-          description="View all submitted needs, their processing status, and sharing amounts. Complete transparency on every request."
-        />
+        <SectionTitle>Account Management</SectionTitle>
         
         <FeatureItem 
           icon={FeatureIcons.family}
-          title="Family Management"
-          description="Add or update family members covered under your membership. Manage dependents easily."
-        />
-        
-        <SectionTitle>Additional Features</SectionTitle>
-        
-        <FeatureItem 
-          icon={FeatureIcons.chat}
-          title="TeleRefuah Access"
-          description="Connect with healthcare providers through our telemedicine service. Available 24/7 for non-emergency consultations."
+          title="Family Members"
+          description="Manage dependents covered under your membership. Add, edit, or remove family members as your household changes."
         />
         
         <FeatureItem 
-          icon={FeatureIcons.bell}
-          title="Notifications"
-          description="Stay informed about sharing status updates, important announcements, and community news."
+          icon={FeatureIcons.user}
+          title="Profile Settings"
+          description="Update your contact information, communication preferences, and account settings."
+        />
+        
+        <FeatureItem 
+          icon={FeatureIcons.currency}
+          title="Billing & Payments"
+          description="View sharing contribution history, update payment methods, and download receipts for tax purposes."
         />
         
         <FeatureItem 
           icon={FeatureIcons.document}
           title="Document Library"
-          description="Access sharing guidelines, tax documents, and important forms all in one place."
+          description="Access sharing guidelines, tax documents (1099s), and important forms all in one organized location."
+        />
+        
+        <SectionTitle>Support & Communication</SectionTitle>
+        
+        <FeatureItem 
+          icon={FeatureIcons.chat}
+          title="TeleRefuah"
+          description="Access 24/7 telemedicine services. Connect with healthcare providers for non-emergency consultations."
         />
         
         <FeatureItem 
-          icon={FeatureIcons.user}
-          title="Profile Management"
-          description="Update contact information, payment methods, and communication preferences."
+          icon={FeatureIcons.bell}
+          title="Notifications Center"
+          description="Stay informed about sharing updates, community announcements, and important deadlines."
         />
-        
-        <SectionTitle>Mobile Experience</SectionTitle>
-        
-        <div style={{ 
-          padding: '20px', 
-          background: '#f9f7f4', 
-          borderRadius: '12px',
-          marginBottom: '12px'
-        }}>
-          <p style={{ fontWeight: 600, marginBottom: '12px', color: '#1a1a1a' }}>Install on Your Phone:</p>
-          <ol style={{ paddingLeft: '20px', margin: 0, color: '#555', lineHeight: 1.8 }}>
-            <li>Open the member portal in your browser</li>
-            <li>Tap &quot;Add to Home Screen&quot; (iOS: Share → Add to Home Screen)</li>
-            <li>Launch like any native app—no app store required!</li>
-          </ol>
-        </div>
         
         <div style={{ 
           marginTop: '28px', 
@@ -638,7 +690,101 @@ export default function DemoPage() {
           borderLeft: '4px solid #16a34a'
         }}>
           <p style={{ fontSize: '14px', color: '#166534', margin: 0, fontWeight: 500 }}>
-            📱 The member portal works offline for viewing your ID card and saved documents—perfect for doctor visits with spotty reception.
+            💡 The desktop dashboard is optimized for detailed work like reviewing claims and managing documents. For quick access on the go, use the mobile app!
+          </p>
+        </div>
+      </InfoModal>
+
+      {/* Member Mobile App Modal */}
+      <InfoModal 
+        isOpen={activeModal === 'memberMobile'} 
+        onClose={() => setActiveModal(null)}
+        title="Member Mobile App"
+      >
+        <p style={{ fontSize: '16px', color: '#444', lineHeight: 1.7, marginBottom: '20px' }}>
+          The Member Mobile App is a <strong>Progressive Web App (PWA)</strong> designed for quick, on-the-go access to your membership—no app store download required.
+        </p>
+        
+        <SectionTitle>Mobile-First Features</SectionTitle>
+        
+        <FeatureItem 
+          icon={FeatureIcons.idCard}
+          title="Instant ID Card Access"
+          description="Pull up your member ID card in seconds. Works offline—perfect for doctor visits with spotty reception."
+        />
+        
+        <FeatureItem 
+          icon={FeatureIcons.camera}
+          title="Snap & Submit"
+          description="Take a photo of your medical bill and submit it directly from your phone. No scanning or uploading from a computer needed."
+        />
+        
+        <FeatureItem 
+          icon={FeatureIcons.bell}
+          title="Push Notifications"
+          description="Get instant alerts when your sharing request is processed, when action is needed, or for important announcements."
+        />
+        
+        <FeatureItem 
+          icon={FeatureIcons.chat}
+          title="TeleRefuah On-the-Go"
+          description="Access telemedicine services from anywhere. Start a consultation right from your phone."
+        />
+        
+        <SectionTitle>Quick Actions</SectionTitle>
+        
+        <FeatureItem 
+          icon={FeatureIcons.document}
+          title="Check Claim Status"
+          description="Quickly see where your submitted needs are in the process. No need to call—it's all at your fingertips."
+        />
+        
+        <FeatureItem 
+          icon={FeatureIcons.family}
+          title="Family Access"
+          description="View ID cards for all family members. Perfect for picking up prescriptions or checking in at appointments."
+        />
+        
+        <SectionTitle>How to Install</SectionTitle>
+        
+        <div style={{ 
+          padding: '20px', 
+          background: '#f9f7f4', 
+          borderRadius: '12px',
+          marginBottom: '12px'
+        }}>
+          <p style={{ fontWeight: 600, marginBottom: '12px', color: '#1a1a1a' }}>iPhone / iPad:</p>
+          <ol style={{ paddingLeft: '20px', margin: 0, color: '#555', lineHeight: 1.8 }}>
+            <li>Open the member portal link in Safari</li>
+            <li>Tap the Share button (square with arrow)</li>
+            <li>Scroll down and tap &quot;Add to Home Screen&quot;</li>
+            <li>Tap &quot;Add&quot; to confirm</li>
+          </ol>
+        </div>
+        
+        <div style={{ 
+          padding: '20px', 
+          background: '#f9f7f4', 
+          borderRadius: '12px'
+        }}>
+          <p style={{ fontWeight: 600, marginBottom: '12px', color: '#1a1a1a' }}>Android:</p>
+          <ol style={{ paddingLeft: '20px', margin: 0, color: '#555', lineHeight: 1.8 }}>
+            <li>Open the member portal link in Chrome</li>
+            <li>Tap the three-dot menu</li>
+            <li>Tap &quot;Add to Home screen&quot;</li>
+            <li>Tap &quot;Add&quot; to confirm</li>
+          </ol>
+        </div>
+        
+        <div style={{ 
+          marginTop: '28px', 
+          padding: '16px 20px', 
+          background: '#fef3c7', 
+          borderRadius: '12px',
+          borderLeft: '4px solid #f59e0b'
+        }}>
+          <p style={{ fontSize: '14px', color: '#92400e', margin: 0, fontWeight: 500 }}>
+            📱 Pro tip: Add the app to your home screen for the best experience—it opens full-screen without browser bars!
           </p>
         </div>
       </InfoModal>
