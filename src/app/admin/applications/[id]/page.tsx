@@ -31,6 +31,12 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
   const [loading, setLoading] = useState(true);
   const [reviewNotes, setReviewNotes] = useState("");
   const [updating, setUpdating] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [showDenyModal, setShowDenyModal] = useState(false);
+  const [contactMessage, setContactMessage] = useState("");
+  const [contactSubject, setContactSubject] = useState("Regarding Your United Refuah Application");
+  const [denyReason, setDenyReason] = useState("");
+  const [sendingEmail, setSendingEmail] = useState(false);
 
   useEffect(() => {
     fetchApplication();
@@ -49,19 +55,54 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
     }
   };
 
-  const updateStatus = async (status: string) => {
+  const updateStatus = async (status: string, reason?: string) => {
     setUpdating(true);
     try {
       await fetch(`/api/applications/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status, reviewNotes, reviewedBy: "Admin" }),
+        body: JSON.stringify({ 
+          status, 
+          reviewNotes, 
+          reviewedBy: "Admin",
+          denyReason: reason,
+          sendEmail: true  // Trigger automated email
+        }),
       });
       fetchApplication();
+      if (status === "DENIED") {
+        setShowDenyModal(false);
+      }
     } catch (error) {
       console.error("Error updating application:", error);
     } finally {
       setUpdating(false);
+    }
+  };
+
+  const sendContactEmail = async () => {
+    if (!contactMessage.trim() || !application) return;
+    
+    setSendingEmail(true);
+    try {
+      await fetch(`/api/applications/${id}/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          subject: contactSubject,
+          message: contactMessage,
+          applicantEmail: application.email,
+          applicantName: `${application.first_name} ${application.last_name}`,
+        }),
+      });
+      setShowContactModal(false);
+      setContactMessage("");
+      alert("Email sent successfully!");
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert("Failed to send email. Please try again.");
+    } finally {
+      setSendingEmail(false);
     }
   };
 
@@ -332,6 +373,13 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
                     ✓ Approve Application
                   </Button>
                   <Button 
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                    onClick={() => setShowContactModal(true)}
+                    disabled={updating}
+                  >
+                    ✉ Contact Applicant
+                  </Button>
+                  <Button 
                     className="w-full"
                     variant="outline"
                     onClick={() => updateStatus("NEEDS_REVIEW")}
@@ -342,7 +390,7 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
                   <Button 
                     className="w-full"
                     variant="destructive"
-                    onClick={() => updateStatus("DENIED")}
+                    onClick={() => setShowDenyModal(true)}
                     disabled={updating || application.status === "DENIED"}
                   >
                     ✗ Deny Application
@@ -379,6 +427,118 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
           </div>
         </div>
       </main>
+
+      {/* Contact Applicant Modal */}
+      {showContactModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 w-full max-w-lg mx-4 shadow-2xl">
+            <h3 className="text-xl font-bold mb-4">Contact Applicant</h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              Send a direct email to {application.first_name} {application.last_name} ({application.email})
+            </p>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm font-medium mb-2 block">Subject</label>
+                <input
+                  type="text"
+                  value={contactSubject}
+                  onChange={(e) => setContactSubject(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium mb-2 block">Message</label>
+                <Textarea
+                  value={contactMessage}
+                  onChange={(e) => setContactMessage(e.target.value)}
+                  placeholder="Enter your message to the applicant..."
+                  rows={6}
+                />
+              </div>
+            </div>
+            
+            <div className="flex gap-3 mt-6">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setShowContactModal(false);
+                  setContactMessage("");
+                }}
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={sendContactEmail}
+                disabled={sendingEmail || !contactMessage.trim()}
+                className="flex-1 bg-blue-600 hover:bg-blue-700"
+              >
+                {sendingEmail ? "Sending..." : "Send Email"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Deny Application Modal */}
+      {showDenyModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 w-full max-w-lg mx-4 shadow-2xl">
+            <h3 className="text-xl font-bold mb-4 text-red-600">Deny Application</h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              This will send an automated denial email to {application.first_name} {application.last_name}.
+            </p>
+            
+            <div>
+              <label className="text-sm font-medium mb-2 block">Denial Reason</label>
+              <select
+                value={denyReason}
+                onChange={(e) => setDenyReason(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 mb-4"
+              >
+                <option value="">Select a reason...</option>
+                <option value="statement_of_beliefs">Did not accept Statement of Beliefs</option>
+                <option value="active_cancer">Active cancer treatment</option>
+                <option value="coverage_gap">Coverage gap exceeds 63 days</option>
+                <option value="pre_existing_severe">Severe pre-existing condition</option>
+                <option value="age_requirement">Does not meet age requirement</option>
+                <option value="incomplete_application">Incomplete application</option>
+                <option value="other">Other (specify in notes)</option>
+              </select>
+              
+              <label className="text-sm font-medium mb-2 block">Additional Notes (optional)</label>
+              <Textarea
+                value={reviewNotes}
+                onChange={(e) => setReviewNotes(e.target.value)}
+                placeholder="Add any additional details about the denial..."
+                rows={3}
+              />
+            </div>
+            
+            <div className="flex gap-3 mt-6">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setShowDenyModal(false);
+                  setDenyReason("");
+                }}
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={() => updateStatus("DENIED", denyReason)}
+                disabled={updating || !denyReason}
+                className="flex-1"
+              >
+                {updating ? "Processing..." : "Confirm Denial"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
