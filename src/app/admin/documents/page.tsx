@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -40,9 +41,18 @@ export default function DocumentsPage() {
   return (
     <div className="p-8">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Document Processing</h1>
-        <p className="text-gray-600 mt-1">Monitor FTP → Extract → MCO document pipeline</p>
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Document Processing</h1>
+          <p className="text-gray-600 mt-1">Monitor FTP → Extract → MCO document pipeline</p>
+        </div>
+        <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2">
+          <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span className="text-amber-800 font-medium text-sm">View Only</span>
+        </div>
       </div>
 
       {/* Pipeline Status */}
@@ -197,9 +207,9 @@ export default function DocumentsPage() {
             </thead>
             <tbody className="divide-y">
               {filteredDocs.map((doc) => (
-                <tr key={doc.id} className="hover:bg-gray-50">
+                <tr key={doc.id} className="hover:bg-gray-50 cursor-pointer" onClick={() => window.location.href = `/admin/documents/${doc.id}`}>
                   <td className="p-4">
-                    <p className="font-medium">{doc.id}</p>
+                    <Link href={`/admin/documents/${doc.id}`} className="font-medium text-primary hover:underline">{doc.id}</Link>
                     <p className="text-xs text-muted-foreground truncate max-w-[200px]">{doc.filename}</p>
                   </td>
                   <td className="p-4">
