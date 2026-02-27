@@ -36,10 +36,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/images/small-logo.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/images/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/pwa-icon-192.png", sizes: "192x192", type: "image/png" },
     ],
     apple: [
-      { url: "/images/small-logo.png", sizes: "180x180", type: "image/png" },
+      { url: "/images/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
 };
@@ -62,14 +64,12 @@ export default function RootLayout({
         <meta name="msapplication-tap-highlight" content="no" />
         
         {/* Apple Touch Icons */}
-        <link rel="apple-touch-icon" href="/images/small-logo.png" />
+        <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
         
-        {/* Splash Screens for iOS */}
-        <link 
-          rel="apple-touch-startup-image" 
-          href="/images/small-logo.png"
-          media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)"
-        />
+        {/* Favicons */}
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png" />
       </head>
       <body className="min-h-screen font-sans antialiased">
         {children}
