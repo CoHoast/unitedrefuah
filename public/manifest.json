@@ -1,0 +1,21 @@
+{
+  "name": "United Refuah HealthShare",
+  "short_name": "United Refuah",
+  "description": "Member portal for United Refuah HealthShare - manage your membership, submit claims, and access TeleRefuah.",
+  "start_url": "/member",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#135c9f",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/images/small-logo.png",
+      "sizes": "118x121",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["health", "medical", "lifestyle"],
+  "lang": "en-US",
+  "dir": "ltr"
+}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { PWAInstallPrompt } from "@/components/PWAInstallPrompt";
 
 const navItems = [
   { href: "/member", icon: "home", label: "Home" },
@@ -219,18 +220,31 @@ export default function MemberLayout({ children }: { children: React.ReactNode }
 
       {/* Mobile Layout */}
       <div className="lg:hidden flex flex-col min-h-screen bg-white max-w-md mx-auto shadow-xl">
-        {/* Status bar spacer for PWA */}
-        <div className="h-12 bg-primary flex items-end justify-center pb-2">
+        {/* Status bar spacer for PWA - uses safe area inset */}
+        <div 
+          className="bg-primary flex items-end justify-center"
+          style={{ 
+            paddingTop: 'max(env(safe-area-inset-top), 12px)',
+            paddingBottom: '8px',
+            minHeight: '48px'
+          }}
+        >
           <span className="text-white/80 text-xs font-medium">United Refuah</span>
         </div>
 
         {/* Main content */}
-        <main className="flex-1 overflow-y-auto pb-20">
+        <main className="flex-1 overflow-y-auto pb-24">
           {children}
         </main>
 
+        {/* PWA Install Prompt */}
+        <PWAInstallPrompt />
+
         {/* Bottom navigation */}
-        <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 max-w-md mx-auto">
+        <nav 
+          className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 max-w-md mx-auto"
+          style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+        >
           <div className="flex justify-around items-center h-16 px-2">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
@@ -240,7 +254,7 @@ export default function MemberLayout({ children }: { children: React.ReactNode }
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex flex-col items-center justify-center w-16 h-14 rounded-xl transition-colors ${
+                  className={`flex flex-col items-center justify-center w-16 h-14 rounded-xl transition-colors active:scale-95 ${
                     isSubmit
                       ? "bg-primary text-white -mt-4 shadow-lg"
                       : isActive
@@ -258,8 +272,6 @@ export default function MemberLayout({ children }: { children: React.ReactNode }
               );
             })}
           </div>
-          {/* Safe area for home indicator */}
-          <div className="h-6 bg-white" />
         </nav>
       </div>
     </div>

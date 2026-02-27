@@ -243,7 +243,7 @@ export default function ChatPage() {
       </div>
 
       {/* Mobile Layout */}
-      <div className="lg:hidden flex flex-col h-[calc(100vh-10rem)]">
+      <div className="lg:hidden flex flex-col" style={{ height: 'calc(100dvh - 8rem)' }}>
         {/* Header */}
         <div className="p-4 border-b bg-white">
           <h1 className="text-lg font-bold text-gray-900">Help & Support</h1>

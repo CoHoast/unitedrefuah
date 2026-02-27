@@ -191,3 +191,106 @@ img {
     font-size: clamp(1.5rem, 6vw, 2.25rem);
   }
 }
+
+/* PWA Animations */
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.animate-in {
+  animation-duration: 300ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+.slide-in-from-bottom {
+  animation-name: slide-in-from-bottom;
+}
+
+.fade-in {
+  animation-name: fade-in;
+}
+
+/* Standalone mode specific styles */
+@media all and (display-mode: standalone) {
+  /* Remove browser-specific UI padding when in standalone */
+  body {
+    padding-top: 0;
+  }
+  
+  /* Prevent overscroll bounce on iOS */
+  html {
+    overscroll-behavior: none;
+  }
+}
+
+/* iOS-specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* Fix for 100vh on iOS Safari */
+  .h-screen-ios {
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+  
+  .min-h-screen-ios {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Improve tap feedback */
+.tap-highlight {
+  -webkit-tap-highlight-color: rgba(19, 92, 159, 0.1);
+}
+
+/* Native-like button press effect */
+.press-effect:active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease;
+}
+
+/* Smooth card interactions */
+.card-press:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Pull to refresh indicator styling */
+.pull-indicator {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.pull-indicator.visible {
+  opacity: 1;
+}
+
+/* Better focus states for accessibility */
+@media (prefers-reduced-motion: no-preference) {
+  .focus-ring:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(19, 92, 159, 0.4);
+    transition: box-shadow 0.15s ease;
+  }
+}
