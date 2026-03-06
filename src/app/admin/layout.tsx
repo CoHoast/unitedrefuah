@@ -62,24 +62,34 @@ const icons: Record<string, React.ReactNode> = {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
+  const pageTitles: Record<string, string> = {
+    "/admin": "Dashboard",
+    "/admin/members": "Members",
+    "/admin/documents": "Document Processing",
+    "/admin/queue": "Processing Queue",
+    "/admin/reports": "Reports & Analytics",
+    "/admin/applications": "Applications",
+    "/admin/messages": "Messages",
+    "/admin/settings": "Settings",
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-50">
       <div className="flex">
-        {/* Sidebar */}
-        <aside className="fixed left-0 top-0 h-screen w-64 bg-gray-900 text-white flex flex-col">
+        {/* Sidebar - Light theme matching member portal */}
+        <aside className="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-200 flex flex-col">
           {/* Logo */}
-          <div className="p-6 border-b border-gray-800">
+          <div className="p-6 border-b border-gray-100">
             <Link href="/admin" className="flex items-center gap-3">
               <Image 
                 src="/images/UnitedRefuahLogoHands-2.svg" 
                 alt="United Refuah" 
                 width={40} 
                 height={40}
-                className="brightness-0 invert"
               />
               <div>
-                <span className="font-bold text-white">United Refuah</span>
-                <span className="text-xs text-gray-400 block">Super Admin</span>
+                <span className="font-bold text-[#135c9f]">United Refuah</span>
+                <span className="text-xs text-gray-500 block">Admin Portal</span>
               </div>
             </Link>
           </div>
@@ -95,8 +105,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   href={item.href}
                   className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                     isActive
-                      ? "bg-primary text-white"
-                      : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                      ? "bg-[#135c9f] text-white"
+                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                   }`}
                 >
                   {icons[item.icon]}
@@ -107,19 +117,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </nav>
 
           {/* Admin user */}
-          <div className="p-4 border-t border-gray-800">
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-800">
-              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-                <span className="text-white font-semibold">AD</span>
+          <div className="p-4 border-t border-gray-100">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50">
+              <div className="w-10 h-10 rounded-full bg-[#135c9f]/10 flex items-center justify-center">
+                <span className="text-[#135c9f] font-semibold">AD</span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-medium text-white truncate">Admin User</p>
-                <p className="text-xs text-gray-400">Super Admin</p>
+                <p className="font-medium text-gray-900 truncate">Admin User</p>
+                <p className="text-xs text-gray-500">Super Admin</p>
               </div>
             </div>
             <Link 
               href="/"
-              className="mt-3 flex items-center justify-center gap-2 w-full px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+              className="mt-3 flex items-center justify-center gap-2 w-full px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
@@ -131,7 +141,30 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Main content */}
         <main className="flex-1 ml-64 min-h-screen">
-          {children}
+          {/* Top bar - matching member portal style */}
+          <header className="sticky top-0 z-40 bg-white border-b border-gray-200 px-8 py-4">
+            <div className="flex items-center justify-between">
+              <h1 className="text-xl font-semibold text-gray-900">
+                {pageTitles[pathname] || "Admin Portal"}
+              </h1>
+              <div className="flex items-center gap-4">
+                <a 
+                  href="tel:4407720700" 
+                  className="flex items-center gap-2 text-sm text-gray-600 hover:text-[#135c9f]"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                  </svg>
+                  (440) 772-0700
+                </a>
+              </div>
+            </div>
+          </header>
+
+          {/* Page content */}
+          <div className="p-8">
+            {children}
+          </div>
         </main>
       </div>
     </div>

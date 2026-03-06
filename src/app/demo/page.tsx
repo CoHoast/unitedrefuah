@@ -226,12 +226,14 @@ export default function DemoPage() {
     return () => clearInterval(interval);
   }, []);
 
-  const BASE_URL = typeof window !== 'undefined' ? window.location.origin : '';
+  // Use production URL for QR codes (works even on server-side render)
+  const PROD_URL = 'https://unitedrefuah-production.up.railway.app';
+  const BASE_URL = typeof window !== 'undefined' ? window.location.origin : PROD_URL;
   
   const DEMO_LINKS = {
     marketing: BASE_URL || '/',
     memberDesktop: `${BASE_URL}/member`,
-    memberMobile: `${BASE_URL}/member`,
+    memberMobile: `${PROD_URL}/member`, // Always use prod URL for QR code scanning
     admin: `${BASE_URL}/admin`,
   };
 
